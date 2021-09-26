@@ -15,6 +15,11 @@ function Create() {
     }else{
       document.querySelector(`.nf${field.id}`).checked = false
     }
+    if(field.activ){
+      document.querySelector(`.af${field.id}`).checked = true
+    }else{
+      document.querySelector(`.af${field.id}`).checked = false
+    }
     return null
   })
   })
@@ -22,9 +27,9 @@ function Create() {
   let lis = field.map((field) =>
   {
       return <tr key={`tr${field.id}`}>
-      <th><input type="checkbox"  className="nf-1" id="nf-1"></input></th> 
+      <th><input onClick={()=> {setIsActiv(field.id)}} type="checkbox"  className={`af${field.id}`} id={`idaf${field.id}`}></input></th> 
       <th>{field.text}</th> 
-      <th><input onClick={()=> {setIsNeed(field.id)}} type="checkbox"  className={`nf${field.id}`} id={`nf${field.id}`}></input></th>
+      <th><input onClick={()=> {setIsNeed(field.id)}} type="checkbox"  className={`nf${field.id}`} id={`idnf${field.id}`}></input></th>
       <th><button onClick={()=> {editwin(field.id)}}>Изменить</button></th>
       <th><button onClick={()=> {delelem(field.id)}}>Удалить</button></th>
       </tr> 
@@ -48,6 +53,18 @@ function Create() {
         </div>
       </div>
     );
+}
+
+function setIsActiv(id) {
+  const fields = AppState.getwithidfieldState(id)
+  console.log(fields);
+  if(document.querySelector(`.af${id}`).checked){
+    fields.activ=true
+  }else{
+    fields.activ=false
+  }
+  AppState.editfieldState(fields)
+
 }
 
 function setIsNeed(id) {
@@ -89,6 +106,5 @@ function delelem(x){
       document.getElementById('root')
     );
   }
-
 
   export default Create;

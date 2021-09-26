@@ -2,7 +2,7 @@ class AppState {
 elem = null
 stetch = null
 field = [
-    {id:0, activ: false, text: "Название" , isNeed: false},
+    {id:0, activ: false, text: "Название" , isNeed: false, type: "Тип поля", typeRes: "Тип поля", priority: "Приоритет"},
 
 ];
 
@@ -39,6 +39,9 @@ editfieldState(newElem){
        this.field.text=newElem.text
        this.field.activ=newElem.activ
        this.field.isNeed=newElem.isNeed
+       this.field.type=newElem.type
+       this.field.typeRes=newElem.typeRes
+       this.field.priority=newElem.priority
         }
     }
 )
