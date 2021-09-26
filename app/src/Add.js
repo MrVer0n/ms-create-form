@@ -46,18 +46,27 @@ function Add() {
   }
   function newfield (x){
     if (x){
+      if(document.querySelector('.needz').checked){
     const field = [{
             id: AppState.getstetchState(),
             activ: false,
             text: document.querySelector('.zagp').value,
-            need: false
+            isNeed: true
         },
     ];
-    if(document.querySelector('.needz').checked){
-        field.need=true
-    }
+    AppState.setfieldState(field)
+    }else{
+      const field = [{
+        id: AppState.getstetchState(),
+        activ: false,
+        text: document.querySelector('.zagp').value,
+        need: false
+    },
+];
 AppState.setfieldState(field)
+}
 console.log(AppState.getfieldState());
+
 
 ReactDOM.render(
     <React.StrictMode>

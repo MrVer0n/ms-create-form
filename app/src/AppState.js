@@ -2,7 +2,7 @@ class AppState {
 elem = null
 stetch = null
 field = [
-    {id:0, activ: false, text: "Название" , need: false},
+    {id:0, activ: false, text: "Название" , isNeed: false},
 
 ];
 
@@ -33,13 +33,12 @@ getwithidfieldState(x){
 return this.elem
 }
 
-editfieldState(newelem){
-    console.log(newelem);
+editfieldState(newElem){
     this.field.forEach((field) =>
-    {if(field.id===newelem.id){
-       this.field.text=newelem.text
-       this.field.activ=newelem.activ
-       this.field.need=newelem.need
+    {if(field.id===newElem.id){
+       this.field.text=newElem.text
+       this.field.activ=newElem.activ
+       this.field.isNeed=newElem.isNeed
         }
     }
 )

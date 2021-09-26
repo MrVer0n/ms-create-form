@@ -9,7 +9,7 @@ function Edit(prop) {
 const field = AppState.getwithidfieldState(prop.idfield)
 React.useEffect(()=>{
   document.querySelector('.zagp').value = field.text
-  if(field.need){
+  if(field.isNeed){
     document.querySelector('.needz').checked = true
   }else{
     document.querySelector('.needz').checked = false
@@ -59,9 +59,9 @@ React.useEffect(()=>{
   function newfield (offon,fields){
     if (offon){
       if(document.querySelector('.needz').checked){
-        fields.need=true
+        fields.isNeed=true
       }else{
-        fields.need=false
+        fields.isNeed=false
       }
    fields.text=document.querySelector('.zagp').value
 

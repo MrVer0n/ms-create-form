@@ -7,20 +7,24 @@ import Add from "./Add";
 import Edit from "./Edit"
 
 function Create() {
+  React.useEffect(()=>{
+    const field = AppState.getfieldState()
+    field.map((field) =>{
+    if(field.isNeed){
+      document.querySelector(`.nf${field.id}`).checked = true
+    }else{
+      document.querySelector(`.nf${field.id}`).checked = false
+    }
+    return null
+  })
+  })
   const field = AppState.getfieldState()
-  React.useEffect(()=>{})
   let lis = field.map((field) =>
   {
-    if(field.need){
-      
-      //document.querySelector('.nf-1').checked = true
-    }else{
-     // document.querySelector('.nf-1').checked = false
-    }
-      return <tr>
-      <th><input  type="checkbox"  className="nf-1" id="nf-1"></input></th> 
+      return <tr key={`tr${field.id}`}>
+      <th><input type="checkbox"  className="nf-1" id="nf-1"></input></th> 
       <th>{field.text}</th> 
-      <th><input type="checkbox"  className="nf-1" id="nf-1"></input></th>
+      <th><input onClick={()=> {setIsNeed(field.id)}} type="checkbox"  className={`nf${field.id}`} id={`nf${field.id}`}></input></th>
       <th><button onClick={()=> {editwin(field.id)}}>Изменить</button></th>
       <th><button onClick={()=> {delelem(field.id)}}>Удалить</button></th>
       </tr> 
@@ -45,6 +49,19 @@ function Create() {
       </div>
     );
 }
+
+function setIsNeed(id) {
+  const fields = AppState.getwithidfieldState(id)
+  console.log(fields);
+  if(document.querySelector(`.nf${id}`).checked){
+    fields.isNeed=true
+  }else{
+    fields.isNeed=false
+  }
+  AppState.editfieldState(fields)
+
+}
+
 function delelem(x){
   AppState.delfieldState(x)
   ReactDOM.render(
