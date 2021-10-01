@@ -17,6 +17,7 @@
 .star-rating__ico{
 	float: right;
 	padding-left: 10px;
+  padding-top: 10px;
 	cursor: pointer;
 	color: #000000;
 }
