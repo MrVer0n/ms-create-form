@@ -2,7 +2,7 @@ class AppState {
 elem = null
 stetch = null
 field = [
-    {id:0, activ: false, text: "Название" , isNeed: false, type: "Тип поля", typeRes: "Тип поля", priority: "Приоритет"},
+    {id:0, activ: false, text: `Название` , isNeed: false, type: "text", typeRes: "tel", priority: "1"},
 
 ];
 

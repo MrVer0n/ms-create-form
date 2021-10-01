@@ -28,7 +28,7 @@ function Create() {
   {
       return <tr key={`tr${field.id}`}>
       <th><input onClick={()=> {setIsActiv(field.id)}} type="checkbox"  className={`af${field.id}`} id={`idaf${field.id}`}></input></th> 
-      <th>{field.text}</th> 
+      <th>{`${field.text} (Тип: ${field.type}, приоритет: ${field.priority})`}</th> 
       <th><input onClick={()=> {setIsNeed(field.id)}} type="checkbox"  className={`nf${field.id}`} id={`idnf${field.id}`}></input></th>
       <th><button onClick={()=> {editwin(field.id)}}>Изменить</button></th>
       <th><button onClick={()=> {delelem(field.id)}}>Удалить</button></th>
