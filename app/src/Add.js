@@ -5,29 +5,30 @@ import AppState from "./AppState";
 import CreateForm from "./CreateForm"
 
 function Add() {
+  React.useEffect(()=>{locResp()})
   return (
     <div>
       <h2>Изменить поле</h2>
       <div>
       <h4>Информация о поле</h4>
-      <label>Заголовок поля:</label>
+      <label id="zagp">Заголовок поля:</label>
       <br/>
-       <input type="text" className="zagp"></input>
+       <input type="text" id="zagp" className="zagp"></input>
        <br/>
-       <input type="checkbox" className="needz"></input>
-       <label>Поле обязательное для заполнения</label>
+       <input type="checkbox" id="needz" className="needz"></input>
+       <label id="needz">Поле обязательное для заполнения</label>
        <br/>
-       <label>Тип поля:</label>
+       <label id="typeP">Тип поля:</label>
        <br/>
-       <select className="typeP">
-           <option value="checkbox">Рейтинг</option>
+       <select onClick={() => locResp()} id="typeP" className="typeP">
+           <option value="rating">Рейтинг</option>
            <option value="text">Текст однострочный</option>
            <option value="textarea">Текст многострочный</option>
        </select>
        <br/>
-       <label>Тип ответа:</label>
+       <label id="typeR">Тип ответа:</label>
        <br/>
-       <select className="typeR">
+       <select id="typeR" className="typeR">
            <option value="string">Строка</option>
            <option value="text">Текст</option>
            <option value="number">Число</option>
@@ -35,9 +36,9 @@ function Add() {
            <option value="tel">Телефон</option>
        </select>
        <br/>
-       <label>Приоритет:</label>
+       <label id="priority">Приоритет:</label>
        <br/>
-       <input type="number" className="priority"></input>
+       <input type="number" id="priority" className="priority"></input>
       </div>
       <div>
       <button onClick={() => newfield(false)}>Отмена</button>
@@ -46,12 +47,22 @@ function Add() {
     </div>
   ); 
   }
+
+  function locResp() {
+    if(document.querySelector('.typeP').value === 'text'){
+      document.querySelector('.typeR').disabled = false
+    }else{
+      document.querySelector('.typeR').value = ''
+      document.querySelector('.typeR').disabled = true
+    }
+  }
+
   function newfield (x){
     if (x){
       if(document.querySelector('.needz').checked){
     const field = [{
             id: AppState.getstetchState(),
-            activ: false,
+            activ: true,
             text: document.querySelector('.zagp').value,
             isNeed: true,
             type: document.querySelector('.typeP').value,
@@ -60,10 +71,11 @@ function Add() {
         },
     ];
     AppState.setfieldState(field)
+    AppState.setSortFieldState() 
     }else{
       const field = [{
         id: AppState.getstetchState(),
-        activ: false,
+        activ: true,
         text: document.querySelector('.zagp').value,
         isNeed: false,
         type: document.querySelector('.typeP').value,
@@ -72,6 +84,7 @@ function Add() {
     },
 ];
 AppState.setfieldState(field)
+AppState.setSortFieldState() 
 }
 console.log(AppState.getfieldState());
 

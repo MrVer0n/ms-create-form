@@ -16,32 +16,31 @@ React.useEffect(()=>{
   }else{
     document.querySelector('.needz').checked = false
   }
-  
+  locResp()
 })
-//return Ren(field)
 return (
   <div>
   <h2>Изменить поле</h2>
   <div>
   <h4>Информация о поле</h4>
-  <label>Заголовок поля:</label>
+  <label id="zagp">Заголовок поля:</label>
   <br/>
-   <input type="text" className="zagp"></input>
+   <input type="text" id="zagp" className="zagp"></input>
    <br/>
-   <input type="checkbox" className="needz"></input>
-   <label>Поле обязательное для заполнения</label>
+   <input type="checkbox" id="needz" className="needz"></input>
+   <label id="needz">Поле обязательное для заполнения</label>
    <br/>
-   <label>Тип поля:</label>
+   <label id="typeP">Тип поля:</label>
    <br/>
-   <select className="typeP">
-       <option value="checkbox">Рейтинг</option>
+   <select onClick={() => locResp()} id="typeP" className="typeP">
+       <option value="rating">Рейтинг</option>
        <option value="text">Текст однострочный</option>
        <option value="textarea">Текст многострочный</option>
    </select>
    <br/>
-   <label>Тип ответа:</label>
+   <label id="typeR">Тип ответа:</label>
    <br/>
-   <select className="typeR">
+   <select id="typeR" className="typeR">
        <option value="string">Строка</option>
        <option value="text">Текст</option>
        <option value="number">Число</option>
@@ -49,9 +48,9 @@ return (
        <option value="tel">Телефон</option>
    </select>
    <br/>
-   <label>Приоритет:</label>
+   <label id="priority">Приоритет:</label>
    <br/>
-   <input type="number" className="priority"></input>
+   <input type="number" id="priority" className="priority"></input>
   </div>
   <div>
     <button onClick={() => newfield(false,field)}>Отмена</button>
@@ -60,6 +59,15 @@ return (
   </div>
 );  
   }
+function locResp() {
+  if(document.querySelector('.typeP').value === 'text'){
+    document.querySelector('.typeR').disabled = false
+  }else{
+    document.querySelector('.typeR').value = ''
+    document.querySelector('.typeR').disabled = true
+  }
+}
+
   function newfield (offon,fields){
     if (offon){
       if(document.querySelector('.needz').checked){
@@ -67,11 +75,12 @@ return (
       }else{
         fields.isNeed=false
       }
-   fields.text=document.querySelector('.zagp').value
+   fields.text = document.querySelector('.zagp').value
    fields.type = document.querySelector('.typeP').value
    fields.typeRes = document.querySelector('.typeR').value
    fields.priority = document.querySelector('.priority').value
-   
+
+AppState.setSortFieldState()   
 AppState.editfieldState(fields)
 console.log(AppState.getfieldState());
 
@@ -81,7 +90,7 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
   );
-}else{
+}else{ 
   ReactDOM.render(
     <React.StrictMode>
       <CreateForm />

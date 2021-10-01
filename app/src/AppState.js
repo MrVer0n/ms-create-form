@@ -15,6 +15,10 @@ getstetchState() {
     return this.stetch
 }
 
+setSortFieldState(){
+    this.field.sort((priv, next) => priv.priority - next.priority)
+}
+
 setfieldState(X) {
 this.field = this.field.concat(X)
 }

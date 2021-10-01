@@ -5,6 +5,7 @@ import CreateForm from "./CreateForm"
 import AppState from "./AppState";
 import Add from "./Add";
 import Edit from "./Edit"
+import FormView from "./FormView"
 
 function Create() {
   React.useEffect(()=>{
@@ -41,11 +42,17 @@ function Create() {
         <h2>Настройка полей формы</h2>
         <div>
          <button onClick={addwin}>Добавит поля в форму</button>
+         <button onClick={formView}>Перейти к форме</button>
         </div>
         <div>
           <div>
             <table>
               <tbody>
+              <tr>
+                <th>Активность</th> 
+                <th>Тип элемента формы</th> 
+                <th>Обязательно для заполнения</th>
+              </tr> 
                 {lis}
               </tbody>
             </table>
@@ -85,6 +92,15 @@ function delelem(x){
     <React.StrictMode>
      <CreateForm />
    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
+
+function formView (){
+  ReactDOM.render(
+    <React.StrictMode>
+      <FormView  />
+    </React.StrictMode>,
     document.getElementById('root')
   );
 }
