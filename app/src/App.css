@@ -30,8 +30,6 @@ display: inline-flex;
    margin-top: 0.5em;
   margin-left: -1em;
   float: right;
-
-
 }
 .star-rating__ico:hover:before,
 .star-rating__ico:hover ~ .star-rating__ico:before,

@@ -1,126 +1,65 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-
-import CreateForm from "./CreateForm"
 import AppState from "./AppState";
-import Add from "./Add";
-import Edit from "./Edit"
-import FormView from "./FormView"
+import {formView, addWin, editWin} from "./function/Render"
+import {setIsActiv, setIsNeed, delelElem} from "./function/function"
+
 
 function Create() {
+const field = AppState.getFieldState()
+
   React.useEffect(()=>{
-    const field = AppState.getfieldState()
+    const field = AppState.getFieldState()
     field.map((field) =>{
-    if(field.isNeed){
-      document.querySelector(`.nf${field.id}`).checked = true
-    }else{
-      document.querySelector(`.nf${field.id}`).checked = false
-    }
-    if(field.activ){
-      document.querySelector(`.af${field.id}`).checked = true
-    }else{
-      document.querySelector(`.af${field.id}`).checked = false
-    }
+      if(field.isNeed){
+        document.querySelector(`.nf${field.id}`).checked = true
+      }else{
+        document.querySelector(`.nf${field.id}`).checked = false
+      }
+      if(field.activ){
+        document.querySelector(`.af${field.id}`).checked = true
+      }else{
+        document.querySelector(`.af${field.id}`).checked = false
+      }
     return null
+    })
   })
-  })
-  const field = AppState.getfieldState()
-  let lis = field.map((field) =>
-  {
-      return <tr key={`tr${field.id}`}>
-      <th><input onClick={()=> {setIsActiv(field.id)}} type="checkbox"  className={`af${field.id}`} id={`idaf${field.id}`}></input></th> 
-      <th>{`${field.text} (Тип: ${field.type}, приоритет: ${field.priority})`}</th> 
-      <th><input onClick={()=> {setIsNeed(field.id)}} type="checkbox"  className={`nf${field.id}`} id={`idnf${field.id}`}></input></th>
-      <th><button onClick={()=> {editwin(field.id)}}>Изменить</button></th>
-      <th><button onClick={()=> {delelem(field.id)}}>Удалить</button></th>
-      </tr> 
-  
-  }
-      )
-    return (
+
+  return (
+    <div>
+      <h2>Настройка полей формы</h2>
       <div>
-        <h2>Настройка полей формы</h2>
+       <button onClick={addWin}>Добавит поля в форму</button>
+       <button onClick={formView}>Перейти к форме</button>
+      </div>
+      <div>
         <div>
-         <button onClick={addwin}>Добавит поля в форму</button>
-         <button onClick={formView}>Перейти к форме</button>
-        </div>
-        <div>
-          <div>
-            <table>
-              <tbody>
-              <tr>
-                <th>Активность</th> 
-                <th>Тип элемента формы</th> 
-                <th>Обязательно для заполнения</th>
-              </tr> 
-                {lis}
-              </tbody>
-            </table>
-          </div>
+          <table>
+            <tbody>
+            <tr>
+              <th>Активность</th> 
+              <th>Тип элемента формы</th> 
+              <th>Обязательно для заполнения</th>
+            </tr> 
+              {
+                field.map((field) =>{
+                  return (
+                    <tr key={`tr${field.id}`}>
+                    <th><input onClick={()=> {setIsActiv(field.id)}} type="checkbox"  className={`af${field.id}`} id={`idaf${field.id}`}></input></th> 
+                    <th>{`${field.text} (Тип: ${field.type}, приоритет: ${field.priority})`}</th> 
+                    <th><input onClick={()=> {setIsNeed(field.id)}} type="checkbox"  className={`nf${field.id}`} id={`idnf${field.id}`}></input></th>
+                    <th><button onClick={()=> {editWin(field.id)}}>Изменить</button></th>
+                    <th><button onClick={()=> {delelElem(field.id)}}>Удалить</button></th>
+                    </tr> 
+                  )
+                })
+              }
+            </tbody>
+          </table>
         </div>
       </div>
-    );
-}
-
-function setIsActiv(id) {
-  const fields = AppState.getwithidfieldState(id)
-  console.log(fields);
-  if(document.querySelector(`.af${id}`).checked){
-    fields.activ=true
-  }else{
-    fields.activ=false
-  }
-  AppState.editfieldState(fields)
-
-}
-
-function setIsNeed(id) {
-  const fields = AppState.getwithidfieldState(id)
-  console.log(fields);
-  if(document.querySelector(`.nf${id}`).checked){
-    fields.isNeed=true
-  }else{
-    fields.isNeed=false
-  }
-  AppState.editfieldState(fields)
-
-}
-
-function delelem(x){
-  AppState.delfieldState(x)
-  ReactDOM.render(
-    <React.StrictMode>
-     <CreateForm />
-   </React.StrictMode>,
-    document.getElementById('root')
+    </div>
   );
+  
 }
-
-function formView (){
-  ReactDOM.render(
-    <React.StrictMode>
-      <FormView  />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
-}
-
-  function addwin (){
-    ReactDOM.render(
-      <React.StrictMode>
-        <Add  />
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
-  }
-
-  function editwin (x){
-    ReactDOM.render(
-      <React.StrictMode>
-        <Edit idfield={x} />
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
-  }
 
   export default Create;

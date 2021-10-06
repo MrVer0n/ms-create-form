@@ -5,39 +5,42 @@ field = [
     {id:0, activ: false, text: `Название` , isNeed: false, type: "text", typeRes: "tel", priority: "1"},
 
 ];
+form = [
+    {id:0, name: `Название`, title:`Что-то`, userID: "1"},
+];
+
 
 getReadstetchState() {
     return this.stetch
 } 
 
-getstetchState() {
+getStetchState() {
     this.stetch = this.stetch+1
     return this.stetch
 }
 
-setSortFieldState(){
-    this.field.sort((priv, next) => priv.priority - next.priority)
+setFieldState(X) {
+    this.field = this.field.concat(X)
 }
 
-setfieldState(X) {
-this.field = this.field.concat(X)
+getFieldState() {
+    return this.field
 }
 
-getfieldState() {
-return this.field
+setAddFieldState(X) {
+    this.field = X
 }
 
-getwithidfieldState(x){
+getWithIdFieldState(x){
     this.field.forEach((field) =>
         {if(field.id===x){
             this.elem = field
             }
-        }
-    )
-return this.elem
+        })
+    return this.elem
 }
 
-editfieldState(newElem){
+editFieldState(newElem){
     this.field.forEach((field) =>
     {if(field.id===newElem.id){
        this.field.text=newElem.text
@@ -47,15 +50,15 @@ editfieldState(newElem){
        this.field.typeRes=newElem.typeRes
        this.field.priority=newElem.priority
         }
-    }
-)
+    })
 }
 
-delfieldState(x) {
+delFieldState(x) {
     this.field.forEach((value, key) => {
         if(value.id === x)
             delete this.field[key]
     })
-    }
+}
+
 }
 export default new AppState()
