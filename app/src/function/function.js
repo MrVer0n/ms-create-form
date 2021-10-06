@@ -1,7 +1,8 @@
 import AppState from '../AppState';
-import {createForm} from "./Render"
+import {renderCreateForm, renderListForm} from "./Render"
 
 
+//##########-OTHER-##########
 export function SortField(){
 const temp = AppState.getFieldState()
 
@@ -9,7 +10,6 @@ const temp = AppState.getFieldState()
     AppState.setAddFieldState(temp)
 
 }
-
 
 export function setIsActiv(id) {
 const fields = AppState.getWithIdFieldState(id)
@@ -24,7 +24,6 @@ const fields = AppState.getWithIdFieldState(id)
 
 }
  
-
 export function setIsNeed(id) {
 const fields = AppState.getWithIdFieldState(id)
 
@@ -38,15 +37,6 @@ const fields = AppState.getWithIdFieldState(id)
 
 }
 
-
-export function delelElem(x) {
-
-    AppState.delFieldState(x)
-    createForm()
-  
-}
-
-
 export function lockResp() {
     if(document.querySelector('.typeP').value === 'text'){
       document.querySelector('.typeR').disabled = false
@@ -55,40 +45,6 @@ export function lockResp() {
       document.querySelector('.typeR').disabled = true
     }
 }
-
-
-export function newField (x){
-    if (x){
-      if(document.querySelector('.needz').checked){
-            const field = [{
-                id: AppState.getStetchState(),
-                activ: true,
-                text: document.querySelector('.zagp').value,
-                isNeed: true,
-                type: document.querySelector('.typeP').value,
-                typeRes: document.querySelector('.typeR').value,
-                priority: document.querySelector('.priority').value,
-                }];
-            AppState.setFieldState(field)
-            SortField()
-        }else{
-            const field = [{
-                id: AppState.getStetchState(),
-                activ: true,
-                text: document.querySelector('.zagp').value,
-                isNeed: false,
-                type: document.querySelector('.typeP').value,
-                typeRes: document.querySelector('.typeR').value,
-                priority: document.querySelector('.priority').value,
-                }];
-            AppState.setFieldState(field)
-            SortField()
-        }
-    createForm()
-    }
-    else{createForm()}
-}
-
 
 export function WinEdit() {
     return(
@@ -100,13 +56,12 @@ export function WinEdit() {
     <input type="text" id="zagp" className="zagp"/>
     </label>
     <br/>
-
+    <label id="needz">
     <input type="checkbox" id="needz" className="needz"/>
-
-    <label id="needz">Поле обязательное для заполнения
+    Поле обязательное для заполнения</label>
     <br/>
     <label id="typeP">Тип поля:</label>
-    </label>
+
     <br/>
 
     <select onClick={() => lockResp()} id="typeP" className="typeP">
@@ -137,6 +92,39 @@ export function WinEdit() {
 }
 
 
+//##########-FIELD-##########
+export function newField (x){
+  if (x){
+    if(document.querySelector('.needz').checked){
+          const field = [{
+              id: AppState.getStetchFieldState(),
+              activ: true,
+              text: document.querySelector('.zagp').value,
+              isNeed: true,
+              type: document.querySelector('.typeP').value,
+              typeRes: document.querySelector('.typeR').value,
+              priority: document.querySelector('.priority').value,
+              }];
+          AppState.setFieldState(field)
+          SortField()
+      }else{
+          const field = [{
+              id: AppState.getStetchFieldState(),
+              activ: true,
+              text: document.querySelector('.zagp').value,
+              isNeed: false,
+              type: document.querySelector('.typeP').value,
+              typeRes: document.querySelector('.typeR').value,
+              priority: document.querySelector('.priority').value,
+              }];
+          AppState.setFieldState(field)
+          SortField()
+      }
+  renderCreateForm()
+  }
+  else{renderCreateForm()}
+}
+
 export function editField (offon,fields){
     if (offon){
       if(document.querySelector('.needz').checked){
@@ -151,9 +139,46 @@ export function editField (offon,fields){
 
     SortField()  
     AppState.editFieldState(fields)
-    createForm()
+    renderCreateForm()
     }
-    else{createForm()}
+    else{renderCreateForm()}
+}
+
+export function delelElem(id) {
+
+  AppState.delFieldState(id)
+  renderCreateForm()
+
+}
+
+
+//##########-FORM-##########
+export function clickAddForm() {
+    const form = [{
+      id: AppState.setStetchFormState(),
+      name: document.querySelector('.nameForm').value,
+      title: "Что-тут?",
+      userId: 0
+    }]
+
+  AppState.setFormState(form)
+    renderListForm()
+}
+
+export function editForm(form) {
+  form.name = document.querySelector('.newNameForm').value
+  form.title = "Что тут?"
+  form.userId = "userId"
+  AppState.editFormState(form)
+  renderListForm()
+  
+}
+
+export function deleteForm(id) {
+
+  AppState.delFormState(id)
+  renderListForm()
+
 }
 
 

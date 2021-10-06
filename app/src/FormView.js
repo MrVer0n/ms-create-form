@@ -1,7 +1,7 @@
 import React from "react";
 
 import AppState from "./AppState";
-import {createForm} from "./function/Render"
+import {renderCreateForm} from "./function/Render"
 
 function FormView(){
 const form = AppState.getFieldState()
@@ -17,7 +17,7 @@ React.useEffect(()=>{
     return (
         <div>
             <h2>Оставить отзыв</h2>
-            <button onClick={() => createForm()}>Вернуться к редактирования</button>
+            <button onClick={() => renderCreateForm()}>Вернуться к редактирования</button>
             <form>
                 {
                     form.map((field) => {
