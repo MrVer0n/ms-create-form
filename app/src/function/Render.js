@@ -5,8 +5,11 @@ import Add from "../Add";
 import CreateForm from "../CreateForm";
 import FormView from "../FormView"
 import Edit from "../Edit"
+import ListForm from '../ListForm';
+import AddForm from '../AddForm';
+import EditForm from '../EditForm'
 
-export function createForm(){
+export function renderCreateForm(){
     ReactDOM.render(
       <React.StrictMode>
        <CreateForm />
@@ -15,7 +18,7 @@ export function createForm(){
     );
   }
   
-export function formView (){
+export function renderFormView (){
     ReactDOM.render(
       <React.StrictMode>
         <FormView  />
@@ -24,7 +27,7 @@ export function formView (){
     );
   }
   
-export function addWin (){
+export function renderAdd (){
       ReactDOM.render(
         <React.StrictMode>
           <Add  />
@@ -33,10 +36,34 @@ export function addWin (){
       );
     }
   
-export function editWin (x){
+export function renderEditWithProps (x){
       ReactDOM.render(
         <React.StrictMode>
           <Edit idfield={x} />
+        </React.StrictMode>,
+        document.getElementById('root')
+      );
+    }
+export function renderListForm (){
+      ReactDOM.render(
+        <React.StrictMode>
+          <ListForm />
+        </React.StrictMode>,
+        document.getElementById('root')
+      );
+    }
+export function rendrAddForm (){
+      ReactDOM.render(
+        <React.StrictMode>
+          <AddForm />
+        </React.StrictMode>,
+        document.getElementById('root')
+      );
+    }
+    export function rendrEditForm (x){
+      ReactDOM.render(
+        <React.StrictMode>
+          <EditForm idForm={x} />
         </React.StrictMode>,
         document.getElementById('root')
       );

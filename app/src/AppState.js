@@ -1,45 +1,62 @@
 class AppState {
 elem = null
-stetch = null
+stetchField = null
+stetchForm = null
 field = [
     {id:0, activ: false, text: `Название` , isNeed: false, type: "text", typeRes: "tel", priority: "1"},
 
 ];
 form = [
-    {id:0, name: `Название`, title:`Что-то`, userID: "1"},
+    {id:0, name: `Форма для отзывов`, title:`Что-то`, userId: 0},
 ];
 
 
-getReadstetchState() {
-    return this.stetch
-} 
-
-getStetchState() {
-    this.stetch = this.stetch+1
-    return this.stetch
+//##########-FORM-##########
+setFormState(x) {
+    this.form = this.form.concat(x)
 }
-
-setFieldState(X) {
-    this.field = this.field.concat(X)
+getFormState() {
+    return this.form
 }
-
-getFieldState() {
-    return this.field
+delFormState(x) {
+    this.form.forEach((value, key) => {
+        if(value.id === x)
+            delete this.form[key]
+    })
 }
-
-setAddFieldState(X) {
-    this.field = X
+editFormState(newElem){
+    this.form.forEach((form) =>
+    {if(form.id===newElem.id){
+       this.form.id=newElem.id
+       this.form.name=newElem.name
+       this.form.title=newElem.title
+       this.form.userId=newElem.userId
+        }
+    })
 }
-
-getWithIdFieldState(x){
-    this.field.forEach((field) =>
-        {if(field.id===x){
-            this.elem = field
+getWithIdFormState(x){
+    this.form.forEach((form) =>
+        {if(form.id===x){
+            this.elem = form
             }
         })
     return this.elem
 }
 
+
+//##########-FIELD-##########
+setFieldState(x) {
+    this.field = this.field.concat(x)
+}
+getFieldState() {
+    return this.field
+}
+delFieldState(x) {
+    this.field.forEach((value, key) => {
+        if(value.id === x)
+            delete this.field[key]
+    })
+}
 editFieldState(newElem){
     this.field.forEach((field) =>
     {if(field.id===newElem.id){
@@ -52,13 +69,36 @@ editFieldState(newElem){
         }
     })
 }
-
-delFieldState(x) {
-    this.field.forEach((value, key) => {
-        if(value.id === x)
-            delete this.field[key]
-    })
+getWithIdFieldState(x){
+    this.field.forEach((field) =>
+        {if(field.id===x){
+            this.elem = field
+            }
+        })
+    return this.elem
 }
+
+setAddFieldState(x) {
+    this.field = x
+}
+
+
+//##########-STETCH-##########
+setStetchFieldState() {
+    this.stetchField = this.stetchField+1
+    return this.stetchField
+}
+getStetchFieldState() {
+    return this.stetchField
+} 
+
+setStetchFormState() {
+    this.stetchField = this.stetchField+1
+    return this.stetchField
+}
+getStetchFormState() {
+    return this.stetchField
+} 
 
 }
 export default new AppState()

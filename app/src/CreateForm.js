@@ -1,6 +1,6 @@
 import React from "react";
 import AppState from "./AppState";
-import {formView, addWin, editWin} from "./function/Render"
+import {renderFormView, renderAdd, renderEditWithProps, renderListForm} from "./function/Render"
 import {setIsActiv, setIsNeed, delelElem} from "./function/function"
 
 
@@ -28,8 +28,10 @@ const field = AppState.getFieldState()
     <div>
       <h2>Настройка полей формы</h2>
       <div>
-       <button onClick={addWin}>Добавит поля в форму</button>
-       <button onClick={formView}>Перейти к форме</button>
+       <button onClick={renderAdd}>Добавит поля в форму</button>
+       <br/>
+       <button onClick={renderFormView}>Перейти к форме</button>
+       <button onClick={renderListForm}>Список форм</button>
       </div>
       <div>
         <div>
@@ -47,7 +49,7 @@ const field = AppState.getFieldState()
                     <th><input onClick={()=> {setIsActiv(field.id)}} type="checkbox"  className={`af${field.id}`} id={`idaf${field.id}`}></input></th> 
                     <th>{`${field.text} (Тип: ${field.type}, приоритет: ${field.priority})`}</th> 
                     <th><input onClick={()=> {setIsNeed(field.id)}} type="checkbox"  className={`nf${field.id}`} id={`idnf${field.id}`}></input></th>
-                    <th><button onClick={()=> {editWin(field.id)}}>Изменить</button></th>
+                    <th><button onClick={()=> {renderEditWithProps(field.id)}}>Изменить</button></th>
                     <th><button onClick={()=> {delelElem(field.id)}}>Удалить</button></th>
                     </tr> 
                   )
