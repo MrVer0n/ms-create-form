@@ -26,16 +26,30 @@ React.useEffect(()=>{
                             if(field.isNeed){
                                 
                                 if(field.type === 'text'){
-                                    
-                                    return(
-                                        <div key={field.id} >
-                                            <label id={field.id}>{field.text}
-                                            <br/>
-                                            <input required id={field.id} type={field.typeRes}/>
-                                            </label>
-                                        </div>
-                                    )
-                                    
+
+                                    if(field.typeRes === "checkbox"){
+
+                                        return(
+                                            <div key={field.id} >
+                                                <label id={field.id}>
+                                                <input required id={field.id} type={field.typeRes}/>
+                                                {field.text}
+                                                </label>
+                                            </div>
+                                        )
+
+                                    }else{
+
+                                        return(
+                                            <div key={field.id} >
+                                                <label id={field.id}>{field.text}
+                                                <br/>
+                                                <input placeholder={field.placeholder} required id={field.id} type={field.typeRes}/>
+                                                </label>
+                                            </div>
+                                        )
+
+                                    }
                                 }else{
                                 
                                     if(field.type === 'textarea'){
@@ -44,7 +58,7 @@ React.useEffect(()=>{
                                             <div key={field.id} >
                                                 <label id={field.id}>{field.text}
                                                 <br/>
-                                                <textarea required id={field.id}/>
+                                                <textarea placeholder={field.placeholder} required id={field.id}/>
                                                 </label>
                                             </div>
                                         )
@@ -76,16 +90,30 @@ React.useEffect(()=>{
                             }else{
                             
                                 if(field.type === 'text'){
-                                    return(
-                                    
-                                        <div key={field.id} >
-                                            <label id={field.id}>{field.text}
-                                            <br/>
-                                            <input id={field.id} type={field.typeRes}/>
-                                            </label>
-                                        </div>
-                                    )
-                                    
+
+                                    if(field.typeRes === "checkbox"){
+
+                                        return(
+                                            <div key={field.id} >
+                                                <label id={field.id}>
+                                                <input id={field.id} type={field.typeRes}/>
+                                                {field.text}
+                                                </label>
+                                            </div>
+                                        )
+
+                                    }else{
+
+                                        return(
+                                            <div key={field.id} >
+                                                <label id={field.id}>{field.text}
+                                                <br/>
+                                                <input placeholder={field.placeholder} id={field.id} type={field.typeRes}/>
+                                                </label>
+                                            </div>
+                                        )
+
+                                    }  
                                 }else{
                                 
                                     if(field.type === 'textarea'){
@@ -94,7 +122,7 @@ React.useEffect(()=>{
                                             <div key={field.id}>
                                                 <label id={field.id}>{field.text}
                                                 <br/>
-                                                <textarea id={field.id}/>
+                                                <textarea placeholder={field.placeholder} id={field.id}/>
                                                 </label>
                                             </div>
                                         )

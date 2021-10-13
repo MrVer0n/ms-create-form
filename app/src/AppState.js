@@ -3,11 +3,11 @@ elem = null
 stetchField = null
 stetchForm = null
 field = [
-    {id:0, activ: false, text: `Название` , isNeed: false, type: "text", typeRes: "tel", priority: "1"},
+    {id:0, activ: false, text: `Название` , isNeed: false, type: "text", typeRes: "tel", priority: "1", placeholder: ""},
 
 ];
 form = [
-    {id:0, name: `Форма для отзывов`, title:`Что-то`, userId: 0},
+    {id:0, name: `Форма для отзывов`, title:`Чтоб отзывы оставлять`},
 ];
 
 

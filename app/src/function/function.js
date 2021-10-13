@@ -46,6 +46,31 @@ export function lockResp() {
     }
 }
 
+export function lockPlaceHold() {
+  switch(document.querySelector('.typeR').value) {
+    case 'text':
+    case 'number':
+    case 'email':
+    case 'tel':
+    case 'url': {
+      document.querySelector('.placehold').disabled = false
+      break;
+    }
+    default: {
+
+      if(document.querySelector('.typeP').value === 'textarea'){
+        document.querySelector('.placehold').disabled = false
+      }else{
+        document.querySelector('.placehold').value = ''
+        document.querySelector('.placehold').disabled = true
+      }
+
+      break;
+    }
+
+  }
+}
+
 export function WinEdit() {
     return(
     <div>
@@ -64,7 +89,7 @@ export function WinEdit() {
 
     <br/>
 
-    <select onClick={() => lockResp()} id="typeP" className="typeP">
+    <select onClick={() => {lockResp();lockPlaceHold()}} id="typeP" className="typeP">
        <option value="rating">Рейтинг</option>
        <option value="text">Текст однострочный</option>
        <option value="textarea">Текст многострочный</option>
@@ -73,13 +98,33 @@ export function WinEdit() {
 
     <label id="typeR">Тип ответа:
     <br/>
-    <select id="typeR" className="typeR">
-        <option value="string">Строка</option>
+    <select onClick={() => lockPlaceHold()} id="typeR" className="typeR">
         <option value="text">Текст</option>
         <option value="number">Число</option>
         <option value="email">E-mail</option>
         <option value="tel">Телефон</option>
+        <option value="url">Веб-адрес</option>
+
+        <option value="date">Дата</option>
+        <option value="time">Время</option>
+        <option value="month">Месяц</option>
+        <option value="week">Неделя</option>
+        <option value="datetime-local">Дата и время</option>
+
+        <option value="checkbox">Флаг</option>
+        <option value="range">Диапазон</option>
+        <option value="file">Файл</option>
+        <option value="color">Цвет</option>
+
+        <option value="image">Изображение</option>
+        <option value="radio">Переключатели</option>
     </select>
+    </label>
+    <br/>
+
+    <label id="zagp">Плейсхолдер:
+    <br/>
+    <input type="text" id="placehold" className="placehold"/>
     </label>
     <br/>
 
@@ -104,6 +149,7 @@ export function newField (x){
               type: document.querySelector('.typeP').value,
               typeRes: document.querySelector('.typeR').value,
               priority: document.querySelector('.priority').value,
+              placeholder: document.querySelector('.placehold').value,
               }];
           AppState.setFieldState(field)
           SortField()
@@ -116,6 +162,7 @@ export function newField (x){
               type: document.querySelector('.typeP').value,
               typeRes: document.querySelector('.typeR').value,
               priority: document.querySelector('.priority').value,
+              placeholder: document.querySelector('.placehold').value,
               }];
           AppState.setFieldState(field)
           SortField()
@@ -136,6 +183,7 @@ export function editField (offon,fields){
    fields.type = document.querySelector('.typeP').value
    fields.typeRes = document.querySelector('.typeR').value
    fields.priority = document.querySelector('.priority').value
+   fields.placeholder = document.querySelector('.placehold').value
 
     SortField()  
     AppState.editFieldState(fields)
@@ -158,7 +206,6 @@ export function clickAddForm() {
       id: AppState.setStetchFormState(),
       name: document.querySelector('.nameForm').value,
       title: "Что-тут?",
-      userId: 0
     }]
 
   AppState.setFormState(form)
@@ -168,7 +215,6 @@ export function clickAddForm() {
 export function editForm(form) {
   form.name = document.querySelector('.newNameForm').value
   form.title = "Что тут?"
-  form.userId = "userId"
   AppState.editFormState(form)
   renderListForm()
   
