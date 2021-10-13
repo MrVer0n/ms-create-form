@@ -10,6 +10,13 @@ function AddForm() {
                 <input className="nameForm" id="nameForm" type="text"/>
             </label>
             <br/>
+
+            <label id="nameForm">Заголовок формы:
+                <br/>
+                <input className="titleForm" id="titleForm" type="text"/>
+            </label>
+            <br/>
+            
             <button onClick={()=> renderListForm()}>Отмена</button>
             <button onClick={()=> clickAddForm()}>Добавить форму</button>
         </div>

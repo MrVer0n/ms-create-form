@@ -17,6 +17,15 @@ export function renderCreateForm(){
       document.getElementById('root')
     );
   }
+
+  export function renderCreateFormPar(idForm){
+    ReactDOM.render(
+      <React.StrictMode>
+       <CreateForm idForm={idForm} />
+     </React.StrictMode>,
+      document.getElementById('root')
+    );
+  }
   
 export function renderFormView (){
     ReactDOM.render(
@@ -27,10 +36,10 @@ export function renderFormView (){
     );
   }
   
-export function renderAdd (){
+export function renderAdd (idForm){
       ReactDOM.render(
         <React.StrictMode>
-          <Add  />
+          <Add idForm={idForm} />
         </React.StrictMode>,
         document.getElementById('root')
       );

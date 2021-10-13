@@ -145,6 +145,7 @@ export function newField (x){
     if(document.querySelector('.needz').checked){
           const field = [{
               id: AppState.setStetchFieldState(),
+              idForm: AppState.getIdForm(),
               activ: true,
               text: document.querySelector('.zagp').value,
               isNeed: true,
@@ -158,6 +159,7 @@ export function newField (x){
       }else{
           const field = [{
               id: AppState.setStetchFieldState(),
+              idForm: AppState.getIdForm(),
               activ: true,
               text: document.querySelector('.zagp').value,
               isNeed: false,
@@ -207,7 +209,7 @@ export function clickAddForm() {
     const form = [{
       id: AppState.setStetchFormState(),
       name: document.querySelector('.nameForm').value,
-      title: "Что-тут?",
+      title: document.querySelector('.titleForm').value,
     }]
 
   AppState.setFormState(form)
@@ -216,7 +218,7 @@ export function clickAddForm() {
 
 export function editForm(form) {
   form.name = document.querySelector('.newNameForm').value
-  form.title = "Что тут?"
+  form.title = document.querySelector('.newTitleForm').value
   AppState.editFormState(form)
   renderListForm()
   

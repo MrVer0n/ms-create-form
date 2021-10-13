@@ -2,8 +2,7 @@ import React from "react";
 
 import AppState from "./AppState";
 import { deleteForm } from "./function/function";
-import { rendrAddForm, rendrEditForm } from "./function/Render";
-
+import { renderCreateFormPar, rendrAddForm, rendrEditForm } from "./function/Render";
 
 
 function ListForm() {
@@ -25,7 +24,7 @@ const form = AppState.getFormState()
                   form.map((form) =>{
                       return (
                         <tr key={`tr${form.id}`}>
-                        <th><a href="./CreateForm.js">{form.name}</a></th> 
+                        <th><a href="#/" onClick={() => renderCreateFormPar(form.id)}>{form.name}</a></th> 
                         <th><button onClick={() => rendrEditForm(form.id)}>Изменить</button></th>
                         <th><button onClick={() => deleteForm(form.id)}>Удалить</button></th>
                         </tr> 

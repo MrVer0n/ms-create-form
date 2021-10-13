@@ -4,11 +4,12 @@ import {renderFormView, renderAdd, renderEditWithProps, renderListForm} from "./
 import {setIsActiv, setIsNeed, delelElem} from "./function/function"
 
 
-function Create() {
-const field = AppState.getFieldState()
+function Create(param) {
+AppState.setIdForm(param.idForm)
+const field = AppState.getWhithIdFormFiledState(AppState.getIdForm())
 
   React.useEffect(()=>{
-    const field = AppState.getFieldState()
+    const field = AppState.getWhithIdFormFiledState(AppState.getIdForm())
     field.map((field) =>{
       if(field.isNeed){
         document.querySelector(`.nf${field.id}`).checked = true
@@ -28,7 +29,7 @@ const field = AppState.getFieldState()
     <div>
       <h2>Настройка полей формы</h2>
       <div>
-       <button onClick={renderAdd}>Добавит поля в форму</button>
+       <button onClick={() => renderAdd()}>Добавит поля в форму</button>
        <br/>
        <button onClick={renderFormView}>Перейти к форме</button>
        <button onClick={renderListForm}>Список форм</button>

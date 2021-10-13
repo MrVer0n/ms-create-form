@@ -3,7 +3,6 @@ import {newField, lockResp, WinEdit} from './function/function'
 
 function Add() {
 React.useEffect(()=>{lockResp()})
-
   return (
     <div>
       <h2>Добавить поле</h2>
