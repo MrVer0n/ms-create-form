@@ -81,18 +81,19 @@ export function WinEdit() {
     <input type="text" id="zagp" className="zagp"/>
     </label>
     <br/>
+
     <label id="needz">
     <input type="checkbox" id="needz" className="needz"/>
-    Поле обязательное для заполнения</label>
+    Поле обязательное для заполнения
+    </label>
     <br/>
+
     <label id="typeP">Тип поля:</label>
-
     <br/>
-
     <select onClick={() => {lockResp();lockPlaceHold()}} id="typeP" className="typeP">
-       <option value="rating">Рейтинг</option>
-       <option value="text">Текст однострочный</option>
-       <option value="textarea">Текст многострочный</option>
+      <option value="text">Текст однострочный</option>
+      <option value="textarea">Текст многострочный</option>
+      <option value="rating">Рейтинг</option>
     </select>
     <br/>
 
@@ -132,6 +133,7 @@ export function WinEdit() {
     <br/>
     <input type="number" id="priority" className="priority"/>
     </label>
+
   </div>
     )
 }
@@ -142,7 +144,7 @@ export function newField (x){
   if (x){
     if(document.querySelector('.needz').checked){
           const field = [{
-              id: AppState.getStetchFieldState(),
+              id: AppState.setStetchFieldState(),
               activ: true,
               text: document.querySelector('.zagp').value,
               isNeed: true,
@@ -155,7 +157,7 @@ export function newField (x){
           SortField()
       }else{
           const field = [{
-              id: AppState.getStetchFieldState(),
+              id: AppState.setStetchFieldState(),
               activ: true,
               text: document.querySelector('.zagp').value,
               isNeed: false,
