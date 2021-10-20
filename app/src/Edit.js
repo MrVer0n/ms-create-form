@@ -23,7 +23,7 @@ React.useEffect(()=>{
 return (
   <div>
     <h2>Изменить поле</h2>
-    {WinEdit()}
+    {WinEdit('edit',prop.idfield)}
     <div>
       <button onClick={() => editField(false,field)}>Отмена</button>
       <button onClick={() => editField(true,field)} >Подтвердить</button>

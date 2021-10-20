@@ -6,7 +6,7 @@ React.useEffect(()=>{lockResp()})
   return (
     <div>
       <h2>Добавить поле</h2>
-      {WinEdit()}
+      {WinEdit('add')}
       <div>
         <button onClick={() => newField(false)}>Отмена</button>
         <button onClick={() => newField(true)} >Подтвердить</button>
