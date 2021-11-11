@@ -5,40 +5,51 @@ import { deleteParam, addParam } from './FinctionField'
 
 
 function MoreParams(props, id) {
-    if(props === 'edit'){
-        AppState.setTempParam(AppState.getWithIdFieldState(id).possbleValues)
+    const [companyName, setCompanyName] = React.useState(id !== undefined ? AppState.getWithIdFieldState(id).possbleValues : []);
+
+    const inputHandler = (value, id) => {
+        const result = companyName.map((item) =>
+            item.id === id ? { ...item, title: value } : item
+        )
+        AppState.setTempParam(result)
+        return result
     }
-    const [additionalParams, setAdditionalParams] = React.useState(AppState.getTempParam())
+
+    const deleteHandler = (id) => {
+        const result = companyName.filter((item) => item.id !== id)
+        AppState.setTempParam(result)
+        return result
+    }
+
+    const addHandler = () => {
+        const result = companyName.concat({ id: Math.floor(Date.now() / 100), title: '' })
+        AppState.setTempParam(result)
+        return result
+    }
 
 
-    
-    React.useEffect(() => {
-        additionalParams.map((params) => {
-           params.title = document.querySelector(`.param${params.id}`).value
-        })
-        AppState.setTempParam(additionalParams)
-    })
     return (
         <div className='MoreParams'>
-            <button onClick={() => {setAdditionalParams(addParam(additionalParams))}}>+</button>
-            <button onClick={() => {setAdditionalParams(deleteParam(additionalParams))}}>-</button>
-            <br/>
             Колличество и заголовок:
-            <br/>
-             {additionalParams.map((params) => {
-                return(
-                    <div key={params.id}>
-                        <input 
-                        type='text' 
-                        id={`param${params.id}`} 
-                        className={`param${params.id}`}/>
-                        <br/>
+            <br />
+            {companyName.map(({ id, title }) => {
+                return (
+                    <div key={id}>
+                        <input
+                            type='text'
+                            id={`param${id}`}
+                            className={`paramClass${id}`}
+                            value={title}
+                            onChange={e => setCompanyName(inputHandler(e.target.value, id))}
+                        />
+                        <button onClick={() => { setCompanyName(deleteHandler(id)) }}>-</button>
+                        <br />
                     </div>
                 )
-             })}
-             <br/>
+            })}
+            <button className="addParam" onClick={() => { setCompanyName(addHandler()) }}>+</button>
+            <br />
         </div>
-    ) 
+    )
 }
-
 export default MoreParams

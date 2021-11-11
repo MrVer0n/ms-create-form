@@ -12,13 +12,14 @@ function EditFieldWin(props) {
     const field = AppState.getWithIdFieldState(Number(useParams().idField))
 
     React.useEffect(() => {
+        /*
         document.querySelector('.zagp').value = field.text
         document.querySelector('.typeP').value = field.type
         document.querySelector('.typeR').value = field.typeRes
         document.querySelector('.priority').value = field.priority
-        field.possbleValues.map((params) => {
-            document.querySelector(`.param${params.id}`).value = params.title
-         })
+        // field.possbleValues.map((params) => {
+        //     document.querySelector(`.param${params.id}`).value = params.title
+        //  })
         
         if (field.isNeed) {
             document.querySelector('.needz').checked = true
@@ -27,15 +28,18 @@ function EditFieldWin(props) {
         }
         lockResp()
         lockPlaceHold()
+        */
     })
 
     return (
         <div>
             <h2>Изменить поле</h2>
-            {FieldCreate('edit',Number(useParams().idField))}
+            {FieldCreate(props,Number(useParams().idField))}
             <div>
+                {/*
                 <button ><Link to={`/form/${Number(useParams().idForm)}`}>Отмена</Link></button>
                 <button onClick={() => {editField(field,true); props.history.goBack()}} >Подтвердить</button>
+                */}
             </div>
         </div>
     )

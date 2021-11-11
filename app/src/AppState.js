@@ -8,17 +8,16 @@ class AppState {
     tempParam = [{
         id: 1,
         title: '',
-        check: false,
+    },
+    {
+        id: 2,
+        title: '',
     }]
     field = [
-
-        { id: 0, idForm: 0, activ: false, text: 'Название', isNeed: false, type: 'text', typeRes: 'tel', priority: '1', placeholder: '', possbleValues:[] },
-
+        { id: 0, idForm: 0, activ: false, text: 'Название', isNeed: false, type: 'text', typeRes: 'radio', priority: '1', placeholder: '', possbleValues:[{id:1,title:'test1'},{id:2,title:'test2'},{id:3,title:'test3'}]},
     ]
     form = [
-
         { id: 0, name: 'Форма для отзывов', title: 'чтобы отзывы оставлять' },
-
     ]
 
     getIdTempParam(){
@@ -28,17 +27,13 @@ class AppState {
 
     setTempParam(x){
         this.tempParam = x
+        //this.tempParam.splice(this.tempParam.length, 0, x)
+        //return this.tempParam
     }
     getTempParam(){
         return this.tempParam
     }
-    resetTempParam(){
-        this.tempParam = [{
-            id: 1,
-            title: '',
-            check: false,
-        }]
-    }
+
     //##########-FORM-##########
     
     setFormState(x) {
@@ -96,6 +91,7 @@ class AppState {
 
     setFieldState(x) {
         this.field = this.field.concat(x)
+        console.log(this.field);
     }
 
 
@@ -114,16 +110,20 @@ class AppState {
 
 
     editFieldState(newElem) {
+        console.log(newElem.id);
+        console.log(this.field);
         this.field.forEach((field) => {
-            if (field.id === newElem.id) {
-                this.field.text = newElem.text
-                this.field.activ = newElem.activ
-                this.field.isNeed = newElem.isNeed
-                this.field.type = newElem.type
-                this.field.typeRes = newElem.typeRes
-                this.field.priority = newElem.priority
+            if (field.id == newElem.id) {
+                field.text = newElem.text
+                field.activ = newElem.activ
+                field.isNeed = newElem.isNeed
+                field.type = newElem.type
+                field.typeRes = newElem.typeRes
+                field.priority = newElem.priority
+                field.possbleValues = newElem.possbleValues
             }
         })
+        console.log(this.field);
     }
 
 

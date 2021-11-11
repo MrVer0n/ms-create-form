@@ -2,7 +2,7 @@ import React from 'react'
 import AppState from '../AppState'
 import propTypes from 'prop-types'
 import '../Css/App.css'
-
+import { useParams } from 'react-router-dom'
 
 function Rating(props) {
     return <div>
@@ -30,7 +30,7 @@ Rating.propTypes = {
 
 
 function FormView(props) {
-    const [form, setForm] = React.useState(AppState.getFieldState())
+    const [form, setForm] = React.useState(AppState.getWhithIdFormFiledState(Number(useParams().idForm)))
     
     React.useEffect(() => {
         document.querySelector('form').addEventListener('submit', (event) => {
@@ -51,24 +51,34 @@ function FormView(props) {
                         switch (field.type) {
 
                         case 'text':
-                            return (
-                                <div key={field.id} >
-                                    <label id={field.id}>{field.text}
-                                        <br />
-                                        <input placeholder={field.placeholder} required={field.isNeed} id={field.id} type={field.typeRes} />
-                                    </label>
-                                </div>
-                            )
-
-                        case 'checkbox':     
-                            return (
-                                <div key={field.id} >
-                                    <label id={field.id}>
-                                        <input required={field.isNeed} id={field.id} type={field.typeRes} />
-                                        {field.text}
-                                    </label>
-                                </div>
-                            )
+                            switch (field.typeRes) {
+                                case 'checkbox':
+                                case 'radio':
+                                    return (
+                                        <div key={field.id} >
+                                            {field.text}
+                                            <br/>
+                                            {field.possbleValues.map((textValue)=>{
+                                                return(
+                                                    <label id={field.id}>
+                                                        <input name={`${field.typeRes}${field.id}`} required={field.isNeed} id={field.id} type={field.typeRes} />
+                                                        {textValue.title}
+                                                    </label>
+                                                )
+                                            })}
+                                        </div>
+                                    )
+                            
+                                default:
+                                    return (
+                                        <div key={field.id} >
+                                            <label id={field.id}>{field.text}
+                                                <br />
+                                                <input placeholder={field.placeholder} required={field.isNeed} id={field.id} type={field.typeRes} />
+                                            </label>
+                                        </div>
+                                    )
+                            }
 
                         case 'textarea':
                             return (
@@ -88,7 +98,7 @@ function FormView(props) {
                         default:
                             break
                         }
-                    } else { return 'Нет активных полей' }
+                    } else { return null }
                 })}
                 <br />
                 <button type="submit">Отправить</button>

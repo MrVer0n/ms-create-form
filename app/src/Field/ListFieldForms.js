@@ -50,8 +50,8 @@ function ViewField() {
                                         <th><input onClick={() => { setIsActiv(field.id) }} type="checkbox" className={`af${field.id}`} id={`idaf${field.id}`}></input></th>
                                         <th>{`${field.text} (Тип: ${field.type}, приоритет: ${field.priority})`}</th>
                                         <th><input onClick={() => { setIsNeed(field.id) }} type="checkbox" className={`nf${field.id}`} id={`idnf${field.id}`}></input></th>
-                                        <th><button><Link to={`/form/${Number(useParams().idForm)}/editfield/${field.id}`}>Изменить</Link></button></th>
-                                        <th><button onClick={() => { setField(delelElem(field.id))}}><Link to={`/form/${Number(useParams().idForm)}`}>Удалить</Link></button></th>
+                                        <th><button><Link to={`/form/${AppState.getIdForm()}/editfield/${field.id}`}>Изменить</Link></button></th>
+                                        <th><button onClick={() => { setField(delelElem(field.id))}}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>
                                         {/**Пока что ЧЕРЕЗ LINK */}
                                     </tr>
                                 )

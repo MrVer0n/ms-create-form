@@ -25,7 +25,7 @@ export function deleteParam(props) {
     return params
 }
 
-
+/*
 export function newField() {
     if (document.querySelector('.needz').checked) {
         const field = [{
@@ -77,6 +77,7 @@ export function editField(fields, done) {
     fields.priority = document.querySelector('.priority').value
     fields.placeholder = document.querySelector('.placehold').value
     fields.possbleValues = AppState.getTempParam()
+   
 
     if(done){
         SortField()
@@ -84,11 +85,12 @@ export function editField(fields, done) {
     }
 
 }
+
 //TODO
 editField.propTypes = {
     fields: propTypes.object
 }
-
+*/
 
 export function lockPlaceHold() {
     switch (document.querySelector('.typeR').value) {
@@ -128,10 +130,13 @@ export function lockMoreParam() {
     switch (document.querySelector('.typeR').value) {
         case 'checkbox':
         case 'radio': {
+            document.querySelector('.addParam').disabled = false
             return true
         }
         
         default: {
+            AppState.setTempParam([])
+            document.querySelector('.addParam').disabled = true
            return false
         }
     }

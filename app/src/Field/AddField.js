@@ -4,7 +4,6 @@ import propTypes from 'prop-types'
 import { newField, lockResp, lockPlaceHold } from './FinctionField'
 import FieldCreate from './FieldCreate'
 
-
 function AddField(props) {
 
     React.useEffect(() => { lockResp()})
@@ -12,10 +11,12 @@ function AddField(props) {
     return (
         <div>
             <h2>Добавить поле</h2>
-            {FieldCreate()}
+            {FieldCreate(props)}
             <div>
+                {/*
                 <button onClick={() => props.history.goBack()}>Отмена</button>
                 <button onClick={() => { newField(); props.history.goBack()}}>Подтвердить</button>
+                */}
             </div>
         </div>
     )
