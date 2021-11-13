@@ -2,21 +2,13 @@
 import AppState from '../AppState'
 import propTypes from 'prop-types'
 
-export function clickAddForm() {
-    const form = [{
-        id: AppState.setStetchFormState(),
-        name: document.querySelector('.nameForm').value,
-        title: document.querySelector('.titleForm').value,
-    }]
-
+export function clickAddForm(form) {
+    form.id = AppState.setStetchFormState()
     AppState.setFormState(form)
 }
 
 
 export function editForm(form) {
-    form.name = document.querySelector('.newNameForm').value
-    form.title = document.querySelector('.newTitleForm').value
-
     AppState.editFormState(form)
 }
 //TODO

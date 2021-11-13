@@ -9,23 +9,6 @@ function ViewField() {
     AppState.setIdForm(Number(useParams().idForm))
     const [field, setField] = React.useState(AppState.getWhithIdFormFiledState(AppState.getIdForm()))
 
-    React.useEffect(() => {
-
-        field.map((field) => {
-            if (field.isNeed) {
-                document.querySelector(`.nf${field.id}`).checked = true
-            } else {
-                document.querySelector(`.nf${field.id}`).checked = false
-            }
-            if (field.activ) {
-                document.querySelector(`.af${field.id}`).checked = true
-            } else {
-                document.querySelector(`.af${field.id}`).checked = false
-            }
-            return null
-        })
-    })
-
     return (
         <div>
             <h2>Настройка полей формы</h2>
@@ -47,11 +30,24 @@ function ViewField() {
                             {field.map((field) => {
                                 return (
                                     <tr key={`tr${field.id}`}>
-                                        <th><input onClick={() => { setIsActiv(field.id) }} type="checkbox" className={`af${field.id}`} id={`idaf${field.id}`}></input></th>
+                                        <th><input
+                                            type="checkbox"
+                                            checked={field.activ}
+                                            className={`af${field.id}`}
+                                            id={`idaf${field.id}`}
+                                            onChange={(e) => { setIsActiv(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
+
                                         <th>{`${field.text} (Тип: ${field.type}, приоритет: ${field.priority})`}</th>
-                                        <th><input onClick={() => { setIsNeed(field.id) }} type="checkbox" className={`nf${field.id}`} id={`idnf${field.id}`}></input></th>
+
+                                        <th><input
+                                            type="checkbox"
+                                            checked={field.isNeed}
+                                            className={`nf${field.id}`}
+                                            id={`idnf${field.id}`}
+                                            onChange={(e) => { setIsNeed(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
+
                                         <th><button><Link to={`/form/${AppState.getIdForm()}/editfield/${field.id}`}>Изменить</Link></button></th>
-                                        <th><button onClick={() => { setField(delelElem(field.id))}}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>
+                                        <th><button onClick={() => { setField(delelElem(field.id)) }}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>
                                         {/**Пока что ЧЕРЕЗ LINK */}
                                     </tr>
                                 )

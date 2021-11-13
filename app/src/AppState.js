@@ -14,28 +14,26 @@ class AppState {
         title: '',
     }]
     field = [
-        { id: 0, idForm: 0, activ: false, text: 'Название', isNeed: false, type: 'text', typeRes: 'radio', priority: '1', placeholder: '', possbleValues:[{id:1,title:'test1'},{id:2,title:'test2'},{id:3,title:'test3'}]},
+        { id: 0, idForm: 0, activ: true, text: 'Название', isNeed: false, type: 'text', typeRes: 'radio', priority: '1', placeholder: '', possbleValues: [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }, { id: 3, title: 'test3' }] },
     ]
     form = [
         { id: 0, name: 'Форма для отзывов', title: 'чтобы отзывы оставлять' },
     ]
 
-    getIdTempParam(){
+    getIdTempParam() {
         this.idTempParam++
         return this.idTempParam
     }
 
-    setTempParam(x){
+    setTempParam(x) {
         this.tempParam = x
-        //this.tempParam.splice(this.tempParam.length, 0, x)
-        //return this.tempParam
     }
-    getTempParam(){
+    getTempParam() {
         return this.tempParam
     }
 
     //##########-FORM-##########
-    
+
     setFormState(x) {
         this.form = this.form.concat(x)
     }
@@ -56,12 +54,13 @@ class AppState {
 
 
     editFormState(newElem) {
+
         this.form.forEach((form) => {
             if (form.id === newElem.id) {
-                this.form.id = newElem.id
-                this.form.name = newElem.name
-                this.form.title = newElem.title
-                this.form.userId = newElem.userId
+                form.id = newElem.id
+                form.name = newElem.name
+                form.title = newElem.title
+                form.userId = newElem.userId
             }
         })
     }
@@ -110,10 +109,9 @@ class AppState {
 
 
     editFieldState(newElem) {
-        console.log(newElem.id);
-        console.log(this.field);
+
         this.field.forEach((field) => {
-            if (field.id == newElem.id) {
+            if (field.id === newElem.id) {
                 field.text = newElem.text
                 field.activ = newElem.activ
                 field.isNeed = newElem.isNeed
@@ -123,7 +121,6 @@ class AppState {
                 field.possbleValues = newElem.possbleValues
             }
         })
-        console.log(this.field);
     }
 
 

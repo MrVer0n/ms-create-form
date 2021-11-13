@@ -1,14 +1,10 @@
 import React from 'react'
-import AppState from '../AppState';
 
-import {  SortField ,editField, lockMoreParam, lockPlaceHold, lockResp } from './FinctionField'
-import MoreParams from './MoreParams';
+import { lockMoreParam, lockPlaceHold, lockResp } from './FinctionField'
 
 
-export function FieldCreate(props,id) {
-    //const fieldCop = AppState.getWithIdFieldState(props)
-    //const [additionalParams, setAdditionalParams] = React.useState(AppState.getTempParam())
-    const [field, setField] = React.useState(id !== undefined ? AppState.getWithIdFieldState(id) :  { id:  Math.floor(Date.now() / 100), idForm: AppState.getIdForm(), activ: false, text: '', isNeed: false, type: 'text', typeRes: 'checkbox', priority: '', placeholder: '', possbleValues:[]})
+export function FieldCreate(field, setField) {
+
     const inputText = (value) => {
         const result = { ...field, text: value }
         return result
@@ -18,11 +14,37 @@ export function FieldCreate(props,id) {
         return result
     }
     const inputType = (value) => {
-        const result = { ...field, type: value }
+        let result = null
+
+        if (value === 'text') {
+            result = { ...field, type: value, }
+        } else {
+            result = { ...field, type: value, typeRes: 'text', placeholder: '', possbleValues: []  }
+        }
+        console.log(result);
         return result
     }
     const inputTypeR = (value) => {
-        const result = { ...field, typeRes: value }
+        let result = null
+        switch (value) {
+            case 'checkbox':
+            case 'radio':
+                result = { ...field, typeRes: value, placeholder: '' }
+                break;
+
+            case 'text':
+            case 'number':
+            case 'email':
+            case 'tel':
+            case 'url':
+                result = { ...field, typeRes: value, possbleValues: [] }
+                break;
+
+            default:
+                result = { ...field, typeRes: value, placeholder: '', possbleValues: [], }
+                break;
+        }
+       
         return result
     }
     const inputPlacehold = (value) => {
@@ -39,37 +61,38 @@ export function FieldCreate(props,id) {
 
     }
     const deleteHandler = (id) => {
-        const result = { ...field, possbleValues:  field.possbleValues.filter((item) => item.id !== id)}
+        const result = { ...field, possbleValues: field.possbleValues.filter((item) => item.id !== id) }
+        return result
+    }
+    const addHandler = () => {
+        const result = { ...field, possbleValues: field.possbleValues.concat({ id: Math.floor(Date.now() / 100), title: '' }) }
         return result
     }
 
-    const addHandler = () => {
-        const result = { ...field, possbleValues: field.possbleValues.concat({ id: Math.floor(Date.now() / 100), title: '' })}
-        return result
-    }
+
     return (
         <div>
             <h4>Информация о поле</h4>
 
             <label id="zagp">Заголовок поля:
                 <br />
-                <input 
-                type="text" 
-                id="zagp" 
-                className="zagp" 
-                value={field.text}
-                onChange={e => setField(inputText(e.target.value))}/>
+                <input
+                    type="text"
+                    id="zagp"
+                    className="zagp"
+                    value={field.text}
+                    onChange={e => setField(inputText(e.target.value))} />
 
             </label>
             <br />
 
             <label id="needz">
-                <input 
-                type="checkbox" 
-                id="needz" 
-                className="needz" 
-                value={field.isNeed}
-                onClick={e => setField(inputIsNeed(e.target.checked))}/>
+                <input
+                    type="checkbox"
+                    id="needz"
+                    className="needz"
+                    checked={field.isNeed}
+                    onChange={e => setField(inputIsNeed(e.target.checked))} />
 
                 Поле обязательное для заполнения
             </label>
@@ -77,12 +100,11 @@ export function FieldCreate(props,id) {
 
             <label id="typeP">Тип поля:</label>
             <br />
-            <select 
-            id="typeP" 
-            className="typeP"
-            value={field.type}
-            onClick={() => { lockResp(); lockPlaceHold() }} 
-            onChange={e => setField(inputType(e.target.value))}>
+            <select
+                id="typeP"
+                className="typeP"
+                value={field.type}
+                onChange={e => { setField(inputType(e.target.value)) }}>
 
                 <option value="text">Текст однострочный</option>
                 <option value="textarea">Текст многострочный</option>
@@ -94,15 +116,13 @@ export function FieldCreate(props,id) {
                 <br />
                 {//Не работает setisActiv(lockMoreParam())
                 }
-                <select 
-                id="typeR" 
-                className="typeR"
-                value={field.typeRes}
-                onClick={() => { lockPlaceHold(); lockMoreParam()}}
-                onChange={e => setField(inputTypeR(e.target.value))}>
+                <select
+                    id="typeR"
+                    className="typeR"
+                    value={field.typeRes}
+                    disabled={lockResp(field.type)}
+                    onChange={e => { setField(inputTypeR(e.target.value)) }}>
 
-                    <option value="checkbox">Флаг</option>
-                    <option value="radio">Переключатели</option>
                     <option value="text">Текст</option>
                     <option value="number">Число</option>
                     <option value="email">E-mail</option>
@@ -115,62 +135,67 @@ export function FieldCreate(props,id) {
                     <option value="week">Неделя</option>
                     <option value="datetime-local">Дата и время</option>
 
+                    <option value="radio">Переключатели</option>
+                    <option value="checkbox">Флаг</option>
                     <option value="range">Диапазон</option>
                     <option value="color">Цвет</option>
                     {/** На дальнейшее будущее
                     <option value="image">Изображение</option>
                     <option value="file">Файл</option>
-                     */}      
+                     */}
 
                 </select>
             </label>
             <br />
             <div className='MoreParams'>
-            Колличество и заголовок:
-            <br />
-            {field.possbleValues.map(({ id, title }) => {
-                return (
-                    <div key={id}>
-                        <input
-                            type='text'
-                            id={`param${id}`}
-                            className={`paramClass${id}`}
-                            value={title}
-                            onChange={e => setField(inputHandler(e.target.value, id))}
-                        />
-                        <button onClick={() => { setField(deleteHandler(id)) }}>-</button>
-                        <br />
-                    </div>
-                )
-            })}
-            <button className="addParam" onClick={() => {setField(addHandler())}}>+</button>
-            <br />
-        </div>
+                Колличество и заголовок:
+                <br />
+                {field.possbleValues.map(({ id, title }) => {
+                    return (
+                        <div key={id}>
+                            <input
+                                type='text'
+                                id={`param${id}`}
+                                className={`paramClass${id}`}
+                                value={title}
+                                onChange={e => setField(inputHandler(e.target.value, id))}
+                            />
+                            <button onClick={() => { setField(deleteHandler(id)) }}>-</button>
+                            <br />
+                        </div>
+                    )
+                })}
+                <button
+                    className="addParam"
+                    disabled={lockMoreParam(field.type, field.typeRes)}
+                    onClick={() => { setField(addHandler()) }}>
+                    +
+                </button>
+                <br />
+            </div>
 
             <label id="zagp">Плейсхолдер:
                 <br />
-                <input 
-                type="text" 
-                id="placehold" 
-                className="placehold" 
-                value={field.placeholder}
-                onChange={e => setField(inputPlacehold(e.target.value))}/>
+                <input
+                    type="text"
+                    id="placehold"
+                    className="placehold"
+                    value={field.placeholder}
+                    disabled={lockPlaceHold(field.type, field.typeRes)}
+                    onChange={e => setField(inputPlacehold(e.target.value))} />
             </label>
             <br />
 
             <label id="priority">Приоритет:
                 <br />
-                <input 
-                type="number" 
-                id="priority" 
-                className="priority"
-                value={field.priority}
-                onChange={e => setField(inputPriority(e.target.value))}/>
+                <input
+                    type="number"
+                    id="priority"
+                    className="priority"
+                    value={field.priority}
+                    onChange={e => setField(inputPriority(e.target.value))} />
             </label>
             <br />
-            <button onClick={() => props.history.goBack()}>Отмена</button>
-            <button onClick={() => {AppState.setFieldState(field); SortField(); props.history.goBack()}}>Подтвердить</button>
-            <button onClick={() => {AppState.editFieldState(field); SortField(); props.history.goBack()}}>Изменить</button>
         </div>
     )
 }

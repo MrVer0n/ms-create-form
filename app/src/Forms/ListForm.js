@@ -1,8 +1,8 @@
 import React from 'react'
 import AppState from '../AppState'
 
-import  deleteForm  from './FunctionForm'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import deleteForm from './FunctionForm'
+import { Link } from 'react-router-dom'
 
 
 function ViewForm() {
@@ -23,7 +23,7 @@ function ViewForm() {
                                 return <tr key={`tr_${form.id}`}>
                                     <th><Link to={`/form/${form.id}`}>{form.name} : {form.title}</Link></th>
                                     <th><button ><Link to={`/editform/${form.id}`}>Изменить</Link></button></th>
-                                    <th><button onClick={() => {setForm(deleteForm(form.id)) }}><Link to={'/'}>Удалить</Link></button></th>
+                                    <th><button onClick={() => { setForm(deleteForm(form.id)) }}><Link to={'/'}>Удалить</Link></button></th>
                                     {/**Пока что ЧЕРЕЗ LINK */}
                                 </tr>
                             })}
