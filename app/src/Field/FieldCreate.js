@@ -21,7 +21,6 @@ export function FieldCreate(field, setField) {
         } else {
             result = { ...field, type: value, typeRes: 'text', placeholder: '', possbleValues: []  }
         }
-        console.log(result);
         return result
     }
     const inputTypeR = (value) => {

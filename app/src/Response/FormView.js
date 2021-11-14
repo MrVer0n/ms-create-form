@@ -8,12 +8,35 @@ import { MoreParams, defParams, TextArea, Rating } from './FuctionView'
 
 
 function FormView(props) {
-    const form = AppState.getWhithIdFormFiledState(Number(useParams().idForm))
+    const formId = Number(useParams().idForm)
+    const form = AppState.getWhithIdFormFiledState(formId)
     
     const writeForm = (event) => {
         event.preventDefault()
-        const form = document.querySelector('form')
-        console.dir(form)
+        const dateNow = new Date().toLocaleString()
+
+        const data = new FormData(event.target)
+        let response = {
+            formId: formId,
+            responseBody: [
+                {
+                    date: dateNow,
+                    type: '',
+                    typeRes: '',
+                    value: '',
+                }
+            ]
+        }
+        for (const key of data.keys()) {
+            const value = data.get(key)
+         
+                
+            }
+
+        
+        // console.log(key + ' -> ' + value)
+        //  const form = document.querySelector('form')
+        //  console.dir(form)
     }
 
     return (

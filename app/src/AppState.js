@@ -19,6 +19,18 @@ class AppState {
     form = [
         { id: 0, name: 'Форма для отзывов', title: 'чтобы отзывы оставлять' },
     ]
+    response = {
+        formId: '0',
+        responseBody:
+            [
+                {
+                    date: '',
+                    type: '',
+                    typeRes: '',
+                    value: '',
+                }
+            ]
+    }
 
     getIdTempParam() {
         this.idTempParam++
@@ -90,7 +102,6 @@ class AppState {
 
     setFieldState(x) {
         this.field = this.field.concat(x)
-        console.log(this.field);
     }
 
 
