@@ -3,7 +3,7 @@ import AppState from '../AppState'
 import propTypes from 'prop-types'
 
 export function clickAddForm(form) {
-    form.id = AppState.setStetchFormState()
+    form.id = Math.floor(Date.now() / 10)
     AppState.setFormState(form)
 }
 
