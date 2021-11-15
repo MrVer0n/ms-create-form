@@ -5,38 +5,27 @@ import propTypes from 'prop-types'
 import '../Css/App.css'
 import { useParams } from 'react-router-dom'
 import { MoreParams, defParams, TextArea, Rating } from './FuctionView'
-
+import FormState from './FormState'
 
 function FormView(props) {
     const formId = Number(useParams().idForm)
     const form = AppState.getWhithIdFormFiledState(formId)
-    
+    FormState.setFormState(form)
+    //let Title = /.*(?=\s.*$)/;
+    //let id = /\w+$/;
     const writeForm = (event) => {
         event.preventDefault()
         const dateNow = new Date().toLocaleString()
-
         const data = new FormData(event.target)
-        let response = {
-            formId: formId,
-            responseBody: [
-                {
-                    date: dateNow,
-                    type: '',
-                    typeRes: '',
-                    value: '',
-                }
-            ]
-        }
-        for (const key of data.keys()) {
-            const value = data.get(key)
-         
-                
-            }
-
         
-        // console.log(key + ' -> ' + value)
-        //  const form = document.querySelector('form')
-        //  console.dir(form)
+        for (const key of data.keys()) {
+            FormState.setResponseState({
+                id:Number(key),
+                data: dateNow,
+                value: data.get(key)
+            })
+        }
+        FormState.setResponseFormState()
     }
 
     return (
