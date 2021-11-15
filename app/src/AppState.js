@@ -1,48 +1,26 @@
 class AppState {
     elem = null
-    stetchField = null
-    stetchForm = null
-    idForm = null
     temp = [{}]
-    idTempParam = 1
-    tempParam = [{
-        id: 1,
-        title: '',
-    },
-    {
-        id: 2,
-        title: '',
+    
+    idForm = null
+    field = [{ 
+        id: 0, 
+        idForm: 0, 
+        activ: true, 
+        text: 'Название', 
+        isNeed: false, 
+        type: 'text', 
+        typeRes: 'radio', 
+        priority: '1', 
+        placeholder: '', 
+        possbleValues: [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }, { id: 3, title: 'test3' }]
     }]
-    field = [
-        { id: 0, idForm: 0, activ: true, text: 'Название', isNeed: false, type: 'text', typeRes: 'radio', priority: '1', placeholder: '', possbleValues: [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }, { id: 3, title: 'test3' }] },
-    ]
-    form = [
-        { id: 0, name: 'Форма для отзывов', title: 'чтобы отзывы оставлять' },
-    ]
-    response = {
-        formId: '0',
-        responseBody:
-            [
-                {
-                    date: '',
-                    type: '',
-                    typeRes: '',
-                    value: '',
-                }
-            ]
-    }
-
-    getIdTempParam() {
-        this.idTempParam++
-        return this.idTempParam
-    }
-
-    setTempParam(x) {
-        this.tempParam = x
-    }
-    getTempParam() {
-        return this.tempParam
-    }
+    form = [{ 
+        id: 0, 
+        name: 'Форма для отзывов', 
+        title: 'чтобы отзывы оставлять' 
+    }]
+ 
 
     //##########-FORM-##########
 
@@ -50,11 +28,9 @@ class AppState {
         this.form = this.form.concat(x)
     }
 
-
     getFormState() {
         return this.form
     }
-
 
     delFormState(x) {
         this.form.forEach((value, key) => {
@@ -64,9 +40,7 @@ class AppState {
         return this.form
     }
 
-
     editFormState(newElem) {
-
         this.form.forEach((form) => {
             if (form.id === newElem.id) {
                 form.id = newElem.id
@@ -77,7 +51,6 @@ class AppState {
         })
     }
 
-
     getWithIdFormState(x) {
         this.form.forEach((form) => {
             if (form.id === x) {
@@ -87,11 +60,9 @@ class AppState {
         return this.elem
     }
 
-
     setIdForm(x) {
         if (x !== undefined) { this.idForm = x }
     }
-
 
     getIdForm() {
         return this.idForm
@@ -104,11 +75,9 @@ class AppState {
         this.field = this.field.concat(x)
     }
 
-
     getFieldState() {
         return this.field
     }
-
 
     delFieldState(x) {
         this.field.forEach((value, key) => {
@@ -118,9 +87,7 @@ class AppState {
         return this.field
     }
 
-
     editFieldState(newElem) {
-
         this.field.forEach((field) => {
             if (field.id === newElem.id) {
                 field.text = newElem.text
@@ -134,7 +101,6 @@ class AppState {
         })
     }
 
-
     getWithIdFieldState(x) {
         this.field.forEach((field) => {
             if (field.id === x) {
@@ -144,11 +110,9 @@ class AppState {
         return this.elem
     }
 
-
     setAddFieldState(x) {
         this.field = x
     }
-
 
     getWhithIdFormFiledState(x) {
         this.temp = [{}]
@@ -161,28 +125,5 @@ class AppState {
         return this.temp
     }
 
-
-    //##########-STETCH-##########
-
-    setStetchFieldState() {
-        this.stetchField = this.stetchField + 1
-        return this.stetchField
-    }
-
-
-    getStetchFieldState() {
-        return this.stetchField
-    }
-
-
-    setStetchFormState() {
-        this.stetchField = this.stetchField + 1
-        return this.stetchField
-    }
-
-
-    getStetchFormState() {
-        return this.stetchField
-    }
 }
 export default new AppState()
