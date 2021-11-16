@@ -4,22 +4,24 @@ import propTypes from 'prop-types'
 
 import { SortField, lockResp, lockPlaceHold, lockMoreParam } from './FinctionField'
 import FieldCreate from './FieldCreate'
+import { setAddField } from '../Fetch'
 
 
 function AddField(props) {
     const [field, setField] = React.useState({
-        id: Math.floor(Date.now() / 10),
+        //id: Math.floor(Date.now() / 10),
         idForm: AppState.getIdForm(),
-        activ: false, 
-        text: '',
-        isNeed: false,
-        type: 'text',
-        typeRes: 'text',
+        isActive: false, 
+        title: '',
+        isRequire: false,
+        inputType: 'text',
         priority: '1',
-        placeholder: '',
+        placeHolder: '',
         possbleValues: []
     })
-    React.useEffect(() => { lockResp(field.type); lockPlaceHold(field.type,field.typeRes); lockMoreParam(field.type,field.typeRes) })
+    React.useEffect(() => { 
+        console.log(field.inputType);
+        lockResp(field.inputType); lockPlaceHold(field.inputType); lockMoreParam(field.inputType) })
 
     return (
         <div>
@@ -27,7 +29,7 @@ function AddField(props) {
             {FieldCreate(field, setField)}
             <div>
                 <button onClick={() => props.history.goBack()}>Отмена</button>
-                <button onClick={() => { AppState.setFieldState(field); SortField(); props.history.goBack() }}>Подтвердить</button>
+                <button onClick={() => { setAddField(field); AppState.setFieldState(field); SortField(); props.history.goBack() }}>Подтвердить</button>
             </div>
         </div>
     )
