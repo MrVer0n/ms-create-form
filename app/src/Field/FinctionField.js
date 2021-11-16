@@ -3,41 +3,37 @@ import AppState from '../AppState'
 import propTypes from 'prop-types'
 
 
-export function lockResp(type) {
-    if (type === 'text') {
-        return false
-    } else {
+export function lockResp(inputType) {
+    if (inputType === 'textarea' || inputType === 'rating') {
+        console.log(1);
         return true
+    } else {
+        console.log(0);
+        return false
     }
 }
 
 
-export function lockPlaceHold(type, typeRes) {
-    switch (type) {
+export function lockPlaceHold(inputType) {
+    switch (inputType) {
         case 'textarea': {
             return false
         }
-        case 'text': {
-            return (typeRes === 'text' || typeRes === 'number' || typeRes === 'email' || typeRes === 'tel' || typeRes === 'url' ? false : true)
-        }
         default: {
-            return true
+            return (inputType === 'text' || inputType === 'number' || inputType === 'email' || inputType === 'tel' || inputType === 'url' ? false : true)
         }
     }
 }
 
 
 //TODO
-export function lockMoreParam(type,typeRes) {
-    switch (type) {
+export function lockMoreParam(inputType) {
+    switch (inputType) {
         case 'textarea': {
             return true
         }
-        case 'text': {
-            return (typeRes === 'checkbox' || typeRes === 'radio' ? false : true)
-        }
         default: {
-            return true
+            return (inputType === 'checkbox' || inputType === 'radio' ? false : true)
         }
     }
 }
@@ -52,24 +48,24 @@ export function SortField() {
 }
 
 
-export function setIsActiv(e, id) {
+export function setIsisActive(e, id) {
     const fields = AppState.getWithIdFieldState(id)
-    fields.activ = e
+    fields.isActive = e
     AppState.editFieldState(fields)
 }
 //TODO
-setIsActiv.propTypes = {
+setIsisActive.propTypes = {
     id: propTypes.number
 }
 
 
-export function setIsNeed(e,id) {
+export function setisRequire(e,id) {
     const fields = AppState.getWithIdFieldState(id)
-    fields.isNeed = e
+    fields.isRequire = e
     AppState.editFieldState(fields)
 }
 //TODO
-setIsNeed.propTypes = {
+setisRequire.propTypes = {
     id: propTypes.number
 }
 
@@ -83,5 +79,5 @@ delelElem.propTypes = {
 }
 
 
-export default setIsActiv
+export default setIsisActive
   

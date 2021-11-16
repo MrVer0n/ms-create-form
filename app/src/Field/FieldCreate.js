@@ -5,21 +5,21 @@ import { lockMoreParam, lockPlaceHold, lockResp } from './FinctionField'
 
 export function FieldCreate(field, setField) {
 
-    const inputText = (value) => {
-        const result = { ...field, text: value }
+    const inputTitle = (value) => {
+        const result = { ...field, title: value }
         return result
     }
-    const inputIsNeed = (value) => {
-        const result = { ...field, isNeed: value }
+    const inputisRequire = (value) => {
+        const result = { ...field, isRequire: value }
         return result
     }
     const inputType = (value) => {
         let result = null
 
         if (value === 'text') {
-            result = { ...field, type: value, }
+            result = { ...field, inputType: value, }
         } else {
-            result = { ...field, type: value, typeRes: 'text', placeholder: '', possbleValues: []  }
+            result = { ...field, inputType: value, placeHolder: '', possbleValues: []  }
         }
         return result
     }
@@ -28,7 +28,7 @@ export function FieldCreate(field, setField) {
         switch (value) {
             case 'checkbox':
             case 'radio':
-                result = { ...field, typeRes: value, placeholder: '' }
+                result = { ...field, inputType: value, placeHolder: '' }
                 break;
 
             case 'text':
@@ -36,18 +36,18 @@ export function FieldCreate(field, setField) {
             case 'email':
             case 'tel':
             case 'url':
-                result = { ...field, typeRes: value, possbleValues: [] }
+                result = { ...field, inputType: value, possbleValues: [] }
                 break;
 
             default:
-                result = { ...field, typeRes: value, placeholder: '', possbleValues: [], }
+                result = { ...field, inputType: value, placeHolder: '', possbleValues: [], }
                 break;
         }
        
         return result
     }
     const inputPlacehold = (value) => {
-        const result = { ...field, placeholder: value }
+        const result = { ...field, placeHolder: value }
         return result
     }
     const inputPriority = (value) => {
@@ -79,8 +79,8 @@ export function FieldCreate(field, setField) {
                     type="text"
                     id="zagp"
                     className="zagp"
-                    value={field.text}
-                    onChange={e => setField(inputText(e.target.value))} />
+                    value={field.title}
+                    onChange={e => setField(inputTitle(e.target.value))} />
 
             </label>
             <br />
@@ -90,8 +90,8 @@ export function FieldCreate(field, setField) {
                     type="checkbox"
                     id="needz"
                     className="needz"
-                    checked={field.isNeed}
-                    onChange={e => setField(inputIsNeed(e.target.checked))} />
+                    checked={field.isRequire}
+                    onChange={e => setField(inputisRequire(e.target.checked))} />
 
                 Поле обязательное для заполнения
             </label>
@@ -102,7 +102,7 @@ export function FieldCreate(field, setField) {
             <select
                 id="typeP"
                 className="typeP"
-                value={field.type}
+                value={field.inputType}
                 onChange={e => { setField(inputType(e.target.value)) }}>
 
                 <option value="text">Текст однострочный</option>
@@ -113,13 +113,13 @@ export function FieldCreate(field, setField) {
 
             <label id="typeR">Тип ответа:
                 <br />
-                {//Не работает setisActiv(lockMoreParam())
+                {//Не работает setisisActive(lockMoreParam())
                 }
                 <select
                     id="typeR"
                     className="typeR"
-                    value={field.typeRes}
-                    disabled={lockResp(field.type)}
+                    value={field.inputType}
+                    disabled={lockResp(field.inputType)}
                     onChange={e => { setField(inputTypeR(e.target.value)) }}>
 
                     <option value="text">Текст</option>
@@ -166,7 +166,7 @@ export function FieldCreate(field, setField) {
                 })}
                 <button
                     className="addParam"
-                    disabled={lockMoreParam(field.type, field.typeRes)}
+                    disabled={lockMoreParam(field.inputType)}
                     onClick={() => { setField(addHandler()) }}>
                     +
                 </button>
@@ -179,8 +179,8 @@ export function FieldCreate(field, setField) {
                     type="text"
                     id="placehold"
                     className="placehold"
-                    value={field.placeholder}
-                    disabled={lockPlaceHold(field.type, field.typeRes)}
+                    value={field.placeHolder}
+                    disabled={lockPlaceHold(field.inputType)}
                     onChange={e => setField(inputPlacehold(e.target.value))} />
             </label>
             <br />

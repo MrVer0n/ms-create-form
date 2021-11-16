@@ -2,13 +2,13 @@ import propTypes from 'prop-types'
 
 export function MoreParams(field) {
     return <div key={field.id}>
-        {field.text}
+        {field.title}
         <br />
-        {field.possbleValues.map((textValue) => {
+        {field.possbleValues.map((titleValue) => {
             return (
-                <label key={textValue.id} id={field.id}>
-                    <input name={`${field.id}`} required={field.isNeed} id={field.id} type={field.typeRes} value={textValue.title}/>
-                    {textValue.title}
+                <label key={titleValue.id} id={field.id}>
+                    <input name={`${field.id}`} required={field.isRequire} id={field.id} type={field.inputType} value={titleValue.title}/>
+                    {titleValue.title}
                 </label>
             )
         })}
@@ -17,28 +17,28 @@ export function MoreParams(field) {
 
 export function defParams(field) {
     return <div key={field.id}>
-        <label id={field.id}>{field.text}
+        <label id={field.id}>{field.title}
             <br />
-            <input name={`${field.id}`} placeholder={field.placeholder} required={field.isNeed} id={field.id} type={field.typeRes} />
+            <input name={`${field.id}`} placeholder={field.placeHolder} required={field.isRequire} id={field.id} type={field.inputType} />
         </label>
     </div>
 }
 
 export function TextArea(field) {
     return <div key={field.id}>
-        <label id={field.id}>{field.text}
+        <label id={field.id}>{field.title}
             <br />
-            <textarea name={`${field.id}`} placeholder={field.placeholder} required={field.isNeed} id={field.id} />
+            <textarea name={`${field.id}`} placeholder={field.placeHolder} required={field.isRequire} id={field.id} />
         </label>
     </div>
 }
 
 export function Rating(field) {
     return <div key={field.id}>
-        <label id={field.id}>{field.text}</label>
+        <label id={field.id}>{field.title}</label>
         <div className="star-rating">
             <div className="star-rating__wrap">
-                <input required={field.isNeed} className="star-rating__input" id={`${field.id}-star-rating-5`} type="radio" name={`${field.id}`} value="5" />
+                <input required={field.isRequire} className="star-rating__input" id={`${field.id}-star-rating-5`} type="radio" name={`${field.id}`} value="5" />
                 <label className="star-rating__ico fa fa-star-o fa-lg" htmlFor={`${field.id}-star-rating-5`} title="5 out of 5 stars"></label>
                 <input className="star-rating__input" id={`${field.id}-star-rating-4`} type="radio" name={`${field.id}`} value="4" />
                 <label className="star-rating__ico fa fa-star-o fa-lg" htmlFor={`${field.id}-star-rating-4`} title="4 out of 5 stars"></label>

@@ -34,20 +34,14 @@ function FormView(props) {
             <button onClick={() => props.history.goBack()}>Вернуться к редактирования</button>
             <form onSubmit = {writeForm} >
                 {form.map((field) => {
-                    if (field.activ) {
+                    if (field.isActive) {
 
-                        switch (field.type) {
+                        switch (field.inputType) {
 
-                        case 'text':
-                            switch (field.typeRes) {
-                                case 'checkbox':
-                                case 'radio':
-                                    return MoreParams(field)
-                                    
-                                default:
-                                    return defParams(field)
-                            }
-
+                        case 'checkbox':
+                        case 'radio':
+                            return MoreParams(field)
+                        
                         case 'textarea':
                             return TextArea(field)
 
@@ -55,12 +49,11 @@ function FormView(props) {
                             return (
                                 Rating(field)
                             )
-
                         default:
-                            break
+                            return defParams(field)
+
                         }
                     } else { return null }
-                    return null
                 })}
                 <br />
                 <button type="submit">Отправить</button>

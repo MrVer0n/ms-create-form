@@ -1,29 +1,32 @@
 class AppState {
-    elem = null
+    elem = undefined
     temp = [{}]
     
-    idForm = null
+    idForm = undefined
     field = [{ 
         id: 0, 
         idForm: 0, 
-        activ: true, 
-        text: 'Название', 
-        isNeed: false, 
-        type: 'text', 
-        typeRes: 'radio', 
+        isActive: true, 
+        title: 'Название', 
+        isRequire: false, 
+        inputType: 'text', 
         priority: '1', 
-        placeholder: '', 
+        placeHolder: '', 
         possbleValues: [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }, { id: 3, title: 'test3' }]
     }]
-    form = [{ 
-        id: 0, 
-        name: 'Форма для отзывов', 
-        title: 'чтобы отзывы оставлять' 
-    }]
+    form = [
+        {
+            id:1,
+            name:'test',
+            title:'test'
+        }
+    ]
  
 
     //##########-FORM-##########
-
+    setAllFromState(x){
+        this.form = x
+    }
     setFormState(x) {
         this.form = this.form.concat(x)
     }
@@ -71,6 +74,10 @@ class AppState {
 
     //##########-FIELD-##########
 
+    setAllFieldState(x){
+        this.field = x
+    }
+
     setFieldState(x) {
         this.field = this.field.concat(x)
     }
@@ -90,11 +97,10 @@ class AppState {
     editFieldState(newElem) {
         this.field.forEach((field) => {
             if (field.id === newElem.id) {
-                field.text = newElem.text
-                field.activ = newElem.activ
-                field.isNeed = newElem.isNeed
-                field.type = newElem.type
-                field.typeRes = newElem.typeRes
+                field.title = newElem.title
+                field.isActive = newElem.isActive
+                field.isRequire = newElem.isRequire
+                field.inputType = newElem.inputType
                 field.priority = newElem.priority
                 field.possbleValues = newElem.possbleValues
             }

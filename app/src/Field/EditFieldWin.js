@@ -13,16 +13,15 @@ function EditFieldWin(props) {
     const [field, setField] = React.useState(id !== undefined ? AppState.getWithIdFieldState(id) : {
         id: Math.floor(Date.now() / 100),
         idForm: AppState.getIdForm(),
-        activ: false,
-        text: '',
-        isNeed: false,
-        type: 'text',
-        typeRes: 'checkbox',
+        isActive: false,
+        title: '',
+        isRequire: false,
+        inputType: 'text',
         priority: '1',
-        placeholder: '',
+        placeHolder: '',
         possbleValues: []
     })
-    React.useEffect(() => { lockResp(field.type); lockPlaceHold(field.type,field.typeRes); lockMoreParam(field.type,field.typeRes) })
+    React.useEffect(() => { lockResp(field.inputType); lockPlaceHold(field.inputType); lockMoreParam(field.inputType) })
 
     return (
         <div>
