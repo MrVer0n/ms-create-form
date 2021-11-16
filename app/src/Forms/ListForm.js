@@ -2,12 +2,22 @@ import React from 'react'
 import AppState from '../AppState'
 
 import deleteForm from './FunctionForm'
+import getAllForm from '../Fetch'
 import { Link } from 'react-router-dom'
 
 
 function ViewForm() {
     const [form, setForm] = React.useState(AppState.getFormState())
-
+    // React.useEffect(()=>{
+    //    async function getDataForm() {
+    //        const data = await getAllForm()
+    //        setForm(data)
+    //        console.log(data);
+    //        AppState.setAllFromState(data)
+    //    }
+    //    getDataForm()
+    // },[])
+    
     return (
         <div>
             <h2>Формы</h2>
@@ -23,7 +33,7 @@ function ViewForm() {
                                 return <tr key={`tr_${form.id}`}>
                                     <th><Link to={`/form/${form.id}`}>{form.name} : {form.title}</Link></th>
                                     <th><button ><Link to={`/editform/${form.id}`}>Изменить</Link></button></th>
-                                    <th><button onClick={() => { setForm(deleteForm(form.id)) }}><Link to={'/'}>Удалить</Link></button></th>
+                                    <th><button onClick={() => { deleteForm(form.id) }}><Link to={'/'}>Удалить</Link></button></th>
                                     {/**Пока что ЧЕРЕЗ LINK */}
                                 </tr>
                             })}

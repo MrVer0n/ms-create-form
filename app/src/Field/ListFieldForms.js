@@ -2,12 +2,22 @@ import React from 'react'
 import AppState from '../AppState'
 
 import { useParams } from 'react-router-dom'
-import { setIsActiv, setIsNeed, delelElem } from './FinctionField'
+import { setIsisActive, setisRequire, delelElem } from './FinctionField'
 import { Link } from 'react-router-dom'
+import { setAllField } from '../Fetch'
 
 function ViewField() {
-    AppState.setIdForm(Number(useParams().idForm))
-    const [field, setField] = React.useState(AppState.getWhithIdFormFiledState(AppState.getIdForm()))
+    const id = Number(useParams().idForm)
+    AppState.setIdForm(id)
+    const [field, setField] = React.useState(AppState.getFieldState())
+    // React.useEffect(()=>{
+    //     async function getDataField() {
+    //      const data = await setAllField()
+    //      AppState.setAllFieldState(data)
+    //      setField(AppState.getWhithIdFormFiledState(AppState.getIdForm()))
+    //  }
+    //     getDataField()
+    //  },[])
 
     return (
         <div>
@@ -32,19 +42,19 @@ function ViewField() {
                                     <tr key={`tr${field.id}`}>
                                         <th><input
                                             type="checkbox"
-                                            checked={field.activ}
+                                            checked={field.isActive}
                                             className={`af${field.id}`}
                                             id={`idaf${field.id}`}
-                                            onChange={(e) => { setIsActiv(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
+                                            onChange={(e) => { setIsisActive(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
 
-                                        <th>{`${field.text} (Тип: ${field.type}, приоритет: ${field.priority})`}</th>
+                                        <th>{`${field.title} (Тип: ${field.inputType}, приоритет: ${field.priority})`}</th>
 
                                         <th><input
                                             type="checkbox"
-                                            checked={field.isNeed}
+                                            checked={field.isRequire}
                                             className={`nf${field.id}`}
                                             id={`idnf${field.id}`}
-                                            onChange={(e) => { setIsNeed(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
+                                            onChange={(e) => { setisRequire(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
 
                                         <th><button><Link to={`/form/${AppState.getIdForm()}/editfield/${field.id}`}>Изменить</Link></button></th>
                                         <th><button onClick={() => { setField(delelElem(field.id)) }}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>

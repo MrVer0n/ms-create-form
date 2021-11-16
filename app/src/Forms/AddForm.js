@@ -6,7 +6,7 @@ import { clickAddForm } from './FunctionForm'
 
 function AddForm(props) {
     const [form, setForm] = React.useState({
-        id: '',
+        //id: '',
         name: '',
         title: '',
     })
