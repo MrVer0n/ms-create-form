@@ -9,7 +9,6 @@ import { setAddField } from '../Fetch'
 
 function AddField(props) {
     const [field, setField] = React.useState({
-        //id: Math.floor(Date.now() / 10),
         idForm: AppState.getIdForm(),
         isActive: false, 
         title: '',
@@ -20,7 +19,6 @@ function AddField(props) {
         possbleValues: []
     })
     React.useEffect(() => { 
-        console.log(field.inputType);
         lockResp(field.inputType); lockPlaceHold(field.inputType); lockMoreParam(field.inputType) })
 
     return (

@@ -3,23 +3,21 @@ class AppState {
     temp = [{}]
     
     idForm = undefined
-    field = [{ 
-        id: 0, 
-        idForm: 0, 
-        isActive: true, 
-        title: 'Название', 
-        isRequire: false, 
-        inputType: 'text', 
-        priority: '1', 
-        placeHolder: '', 
-        possbleValues: [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }, { id: 3, title: 'test3' }]
-    }]
+    field = [
+        //{ 
+        // id: 0, 
+        // idForm: 0, 
+        // isActive: true, 
+        // title: 'Название', 
+        // isRequire: false, 
+        // inputType: 'text', 
+        // priority: '1', 
+        // placeHolder: '', 
+        // possbleValues: [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }, { id: 3, title: 'test3' }]
+        //}
+]
     form = [
-        {
-            id:1,
-            name:'test',
-            title:'test'
-        }
+
     ]
  
 
