@@ -1,14 +1,13 @@
 //import React from 'react'
 import AppState from '../AppState'
 import propTypes from 'prop-types'
+import { setDeleteField } from '../Fetch'
 
 
 export function lockResp(inputType) {
     if (inputType === 'textarea' || inputType === 'rating') {
-        console.log(1);
         return true
     } else {
-        console.log(0);
         return false
     }
 }
@@ -71,7 +70,7 @@ setisRequire.propTypes = {
 
 
 export function delelElem(id) {
-    return AppState.delFieldState(id)
+    return setDeleteField(id)
 }
 //TODO
 delelElem.propTypes = {

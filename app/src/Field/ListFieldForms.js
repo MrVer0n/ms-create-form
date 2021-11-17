@@ -4,20 +4,25 @@ import AppState from '../AppState'
 import { useParams } from 'react-router-dom'
 import { setIsisActive, setisRequire, delelElem } from './FinctionField'
 import { Link } from 'react-router-dom'
-import { setAllField } from '../Fetch'
+import { getAllField } from '../Fetch'
 
 function ViewField() {
     const id = Number(useParams().idForm)
     AppState.setIdForm(id)
     const [field, setField] = React.useState(AppState.getFieldState())
-    // React.useEffect(()=>{
-    //     async function getDataField() {
-    //      const data = await setAllField()
-    //      AppState.setAllFieldState(data)
-    //      setField(AppState.getWhithIdFormFiledState(AppState.getIdForm()))
-    //  }
-    //     getDataField()
-    //  },[])
+    React.useEffect(()=>{
+        async function getDataField() {
+         const data = await getAllField()
+         AppState.setAllFieldState(data); setField(AppState.getFieldState())
+     }
+        getDataField()
+     },[])
+
+     async function delFild(id) {
+        await delelElem(id)
+        const data = await getAllField()
+        AppState.setAllFieldState(data); setField(AppState.getFieldState())
+    }
 
     return (
         <div>
@@ -57,7 +62,7 @@ function ViewField() {
                                             onChange={(e) => { setisRequire(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
 
                                         <th><button><Link to={`/form/${AppState.getIdForm()}/editfield/${field.id}`}>Изменить</Link></button></th>
-                                        <th><button onClick={() => { setField(delelElem(field.id)) }}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>
+                                        <th><button onClick={() => { delFild(field.id)}}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>
                                         {/**Пока что ЧЕРЕЗ LINK */}
                                     </tr>
                                 )

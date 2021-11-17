@@ -6,12 +6,14 @@ import { SortField, lockMoreParam, lockResp, lockPlaceHold } from './FinctionFie
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import FieldCreate from './FieldCreate'
+import { setFindField, setUpdateField } from '../Fetch'
 
 
 function EditFieldWin(props) {
     const id = Number(useParams().idField)
+    setFindField(id)
     const [field, setField] = React.useState(id !== undefined ? AppState.getWithIdFieldState(id) : {
-        id: Math.floor(Date.now() / 100),
+        id:id,
         idForm: AppState.getIdForm(),
         isActive: false,
         title: '',
@@ -29,7 +31,7 @@ function EditFieldWin(props) {
             {FieldCreate(field, setField)}
             <div>
                 <button ><Link to={`/form/${Number(useParams().idForm)}`}>Отмена</Link></button>
-                <button onClick={() => { AppState.editFieldState(field); SortField(); props.history.goBack() }}>Изменить</button>
+                <button onClick={() => { console.log(field); setUpdateField(field);AppState.editFieldState(field); SortField(); props.history.goBack() }}>Изменить</button>
             </div>
         </div>
     )

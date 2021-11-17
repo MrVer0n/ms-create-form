@@ -1,4 +1,7 @@
-const firstUrl = 'http://c076-37-21-158-61.ngrok.io'
+const firstUrl = 'http://2665-37-21-158-61.ngrok.io'
+
+
+//##############GET##################
 
 export async function getAllForm(){
     const url = firstUrl+'/api/v1/forms/all'
@@ -10,6 +13,20 @@ export async function getAllForm(){
     }
     
 }
+export async function getAllField(){
+    const url = firstUrl+'/api/v1/fields/all'
+    try {
+        const data = await sendRequestB('GET',url)
+        return data.data
+    } catch(err) { 
+        console.log(err)
+    }
+}
+export async function setAllResponse(){
+}
+
+
+//##############POST##################
 
 export async function setAddForm(body){
     const url = firstUrl+'/api/v1/forms/add'
@@ -20,6 +37,47 @@ export async function setAddForm(body){
         console.log(err)
     }
 }
+export async function setAddField(field){
+    console.log(field);
+    const url = firstUrl+'/api/v1/fields/add'
+    try {
+        const data = await sendRequestB('POST',url,field)
+        return data.data
+    } catch(err) { 
+        console.log(err)
+    }
+}
+export async function setAddResponse(response){
+}
+
+
+//##############DELETE##################
+
+export async function setDeleteForm(body){
+    const url = firstUrl+'/api/v1/forms/remove'
+    try {
+        const data = await sendRequestB('DELETE',url,body)
+        alert(data.message)
+        return data.message
+    } catch(err) { 
+        console.log(err)
+    }
+}
+export async function setDeleteField(id){
+    const url = firstUrl+'/api/v1/fields/remove'
+    try {
+        const data = await sendRequestB('DELETE',url,{id})
+        alert(data.message)
+        return data.message
+    } catch(err) { 
+        console.log(err)
+    }
+}
+export async function setDeleteResponse(id){
+}
+
+
+//##############PATCH##################
 
 export async function setUpdateForm(body){
     const url = firstUrl+'/api/v1/forms/update'
@@ -30,11 +88,10 @@ export async function setUpdateForm(body){
         console.log(err)
     }
 }
-
-export async function setDeleteForm(body){
-    const url = firstUrl+'/api/v1/forms/remove'
+export async function setUpdateField(field){
+    const url = firstUrl+'/api/v1/fields/update'
     try {
-        const data = await sendRequestB('DELETE',url,body)
+        const data = await sendRequestB('PATCH',url,field)
         alert(data.message)
     } catch(err) { 
         console.log(err)
@@ -42,40 +99,19 @@ export async function setDeleteForm(body){
 }
 
 
-export async function setAllField(){
-    const url = firstUrl+'/api/v1/fields/all'
+//##############GET-ID##################
+
+export async function setFindField(id){
+    const url = firstUrl+'/api/v1/fields/find'
     try {
-        const data = await sendRequestB('GET',url)
+        const data = await sendRequestB('GET',url,{id})
         return data.data
     } catch(err) { 
         console.log(err)
     }
 }
 
-export async function setAddField(field){
-    const url = firstUrl+'/api/v1/fields/add'
-    try {
-        const data = await sendRequestB('POST',url,field)
-        return data.data
-    } catch(err) { 
-        console.log(err)
-    }
-}
 
-export async function setUpdateField(field){
-
-}
-export async function setDeleteField(id){
-
-}
-
-
-export async function setAllResponse(){
-
-}
-export async function setAddResponse(response){
-
-}
 
 
 export async function sendRequestB(method, url, body=undefined) {
