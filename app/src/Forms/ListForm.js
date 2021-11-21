@@ -10,18 +10,20 @@ function ViewForm() {
     const [form, setForm] = React.useState(AppState.getFormState())
     React.useEffect(()=>{
        async function getDataForm() {
-           const data = await getAllForm()
-           setForm(data)
-           AppState.setAllFromState(data)
+           if(AppState.getFormState().length === 0){
+            const data = await getAllForm()
+            AppState.setAllFromState(data)
+            setForm(AppState.getFormState())
+           } 
        }
        getDataForm()
     },[])
 
-    async function delForm(id) {
-        await deleteForm(id)
-        const data = await getAllForm()
-        setForm(data);
-        AppState.setAllFromState(data)
+    function delForm(id) {
+        if(window.confirm("Вы уверены?")) {
+            deleteForm(id)
+            setForm(AppState.getFormState())
+        }
     }
     
     return (
@@ -35,14 +37,14 @@ function ViewForm() {
                             <tr>
                                 <th>Название</th>
                             </tr>
-                            {form.map(form => {
+                            {form !== undefined? form.map(form => {
                                 return <tr key={`tr_${form.id}`}>
-                                    <th><Link to={`/form/${form.id}`}>{form.name} : {form.title}</Link></th>
+                                    <th><Link onClick={AppState.setAllFieldState([])} to={`/form/${form.id}`}>{form.name} : {form.title}</Link></th>
                                     <th><button ><Link to={`/editform/${form.id}`}>Изменить</Link></button></th>
                                     <th><button onClick={() => { delForm(form.id) }}><Link to={'/'}>Удалить</Link></button></th>
                                     {/**Пока что ЧЕРЕЗ LINK */}
                                 </tr>
-                            })}
+                            }): null}
                         </tbody>
                     </table>
                 </div>

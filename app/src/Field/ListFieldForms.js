@@ -4,26 +4,36 @@ import AppState from '../AppState'
 import { useParams } from 'react-router-dom'
 import { setIsisActive, setisRequire, delelElem } from './FinctionField'
 import { Link } from 'react-router-dom'
-import { getAllField } from '../Fetch'
+import { getFieldForm } from '../Fetch'
 
 function ViewField() {
-    const id = Number(useParams().idForm)
-    AppState.setIdForm(id)
+    const idForm = Number(useParams().idForm)
+    AppState.setIdForm(idForm)
     const [field, setField] = React.useState(AppState.getFieldState())
-    React.useEffect(()=>{
-        async function getDataField() {
-         const data = await getAllField()
-         AppState.setAllFieldState(data); setField(AppState.getFieldState())
-     }
-        getDataField()
-     },[])
+    React.useEffect(() => {
+        if (AppState.getFieldState().length === 0) {
+            async function getDataField() {
+                const data = await getFieldForm(AppState.getIdForm())
+                AppState.setAllFieldState(data); setField(AppState.getFieldState())
+            }
+            getDataField()
+        }
+    }, [])
 
-     async function delFild(id) {
-        await delelElem(id)
-        const data = await getAllField()
-        AppState.setAllFieldState(data); setField(AppState.getFieldState())
+    function delFild(id) {
+        if (window.confirm("Вы уверены?")) {
+            delelElem(id)
+            setField(AppState.getFieldState())
+        }
     }
-
+    function activFild(e, id, idForm) {
+        setIsisActive(e, id)
+        setField(AppState.getWhithIdFormFiledState(idForm))
+    }
+    function racuireFild(e, id, idForm) {
+        setisRequire(e, id)
+        setField(AppState.getWhithIdFormFiledState(idForm))
+    }
     return (
         <div>
             <h2>Настройка полей формы</h2>
@@ -50,7 +60,7 @@ function ViewField() {
                                             checked={field.isActive}
                                             className={`af${field.id}`}
                                             id={`idaf${field.id}`}
-                                            onChange={(e) => { setIsisActive(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
+                                            onChange={(e) => { activFild(e.target.checked, field.id, idForm) }} /></th>
 
                                         <th>{`${field.title} (Тип: ${field.inputType}, приоритет: ${field.priority})`}</th>
 
@@ -59,10 +69,10 @@ function ViewField() {
                                             checked={field.isRequire}
                                             className={`nf${field.id}`}
                                             id={`idnf${field.id}`}
-                                            onChange={(e) => { setisRequire(e.target.checked, field.id); setField(AppState.getWhithIdFormFiledState(AppState.getIdForm())) }} /></th>
+                                            onChange={(e) => { racuireFild(e.target.checked, field.id, idForm) }} /></th>
 
                                         <th><button><Link to={`/form/${AppState.getIdForm()}/editfield/${field.id}`}>Изменить</Link></button></th>
-                                        <th><button onClick={() => { delFild(field.id)}}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>
+                                        <th><button onClick={() => { delFild(field.id) }}><Link to={`/form/${AppState.getIdForm()}`}>Удалить</Link></button></th>
                                         {/**Пока что ЧЕРЕЗ LINK */}
                                     </tr>
                                 )
