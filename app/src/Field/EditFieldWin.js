@@ -2,18 +2,16 @@ import React from 'react'
 import AppState from '../AppState'
 import propTypes from 'prop-types'
 
-import { SortField, lockMoreParam, lockResp, lockPlaceHold } from './FinctionField'
+import FieldCreate from './FieldCreate'
+import { lockMoreParam, lockResp, lockPlaceHold, updataField } from './FinctionField'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import FieldCreate from './FieldCreate'
-import { setFindField, setUpdateField } from '../Fetch'
 
 
 function EditFieldWin(props) {
     const id = Number(useParams().idField)
-    setFindField(id)
     const [field, setField] = React.useState(id !== undefined ? AppState.getWithIdFieldState(id) : {
-        id:id,
+        id: id,
         idForm: AppState.getIdForm(),
         isActive: false,
         title: '',
@@ -23,7 +21,11 @@ function EditFieldWin(props) {
         placeHolder: '',
         possbleValues: []
     })
-    React.useEffect(() => { lockResp(field.inputType); lockPlaceHold(field.inputType); lockMoreParam(field.inputType) })
+    React.useEffect(() => {
+        lockResp(field.inputType)
+        lockPlaceHold(field.inputType)
+        lockMoreParam(field.inputType)
+    }, [field.inputType, id])
 
     return (
         <div>
@@ -31,7 +33,7 @@ function EditFieldWin(props) {
             {FieldCreate(field, setField)}
             <div>
                 <button ><Link to={`/form/${Number(useParams().idForm)}`}>Отмена</Link></button>
-                <button onClick={() => { console.log(field); setUpdateField(field);AppState.editFieldState(field); SortField(); props.history.goBack() }}>Изменить</button>
+                <button onClick={async () => { await updataField(field); props.history.goBack() }}>Изменить</button>
             </div>
         </div>
     )

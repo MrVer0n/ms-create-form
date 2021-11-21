@@ -1,7 +1,7 @@
 //import React from 'react'
 import AppState from '../AppState'
 import propTypes from 'prop-types'
-import { setDeleteField } from '../Fetch'
+import { setAddField, setDeleteField, setUpdateField } from '../Fetch'
 
 
 export function lockResp(inputType) {
@@ -11,7 +11,6 @@ export function lockResp(inputType) {
         return false
     }
 }
-
 
 export function lockPlaceHold(inputType) {
     switch (inputType) {
@@ -24,8 +23,6 @@ export function lockPlaceHold(inputType) {
     }
 }
 
-
-//TODO
 export function lockMoreParam(inputType) {
     switch (inputType) {
         case 'textarea': {
@@ -38,41 +35,51 @@ export function lockMoreParam(inputType) {
 }
 
 
+export async function addField(field) {
+    const newField = await setAddField(field);
+    AppState.setFieldState(newField);
+    SortField();
+}
+
+export async function updataField(field) {
+    const updateField = await setUpdateField(field) 
+    AppState.editFieldState(updateField)
+    SortField();  
+}
+
 export function SortField() {
     const temp = AppState.getFieldState()
 
     temp.sort((priv, next) => priv.priority - next.priority)
-    AppState.setAddFieldState(temp)
+    AppState.setAllFieldState(temp)
 
 }
-
 
 export function setIsisActive(e, id) {
     const fields = AppState.getWithIdFieldState(id)
     fields.isActive = e
     AppState.editFieldState(fields)
+    setUpdateField(fields)
 }
-//TODO
 setIsisActive.propTypes = {
     id: propTypes.number
 }
-
 
 export function setisRequire(e,id) {
     const fields = AppState.getWithIdFieldState(id)
     fields.isRequire = e
     AppState.editFieldState(fields)
+    setUpdateField(fields)
 }
-//TODO
 setisRequire.propTypes = {
     id: propTypes.number
 }
 
 
 export function delelElem(id) {
+    AppState.delFieldState(id)
     return setDeleteField(id)
 }
-//TODO
 delelElem.propTypes = {
     id: propTypes.number
 }

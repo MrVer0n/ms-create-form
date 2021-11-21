@@ -44,7 +44,7 @@ function EditForm(props) {
             <br />
 
             <button onClick={() => props.history.goBack()}>Отмена</button>
-            <button onClick={() => { editForm(form); props.history.goBack() }}>Изменить</button>
+            <button onClick={async () => { await editForm(form); props.history.goBack() }}>Изменить</button>
         </div>
     )
 }

@@ -1,12 +1,11 @@
 import React from 'react'
 import propTypes from 'prop-types'
 
-import { clickAddForm } from './FunctionForm'
+import { addForm } from './FunctionForm'
 
 
 function AddForm(props) {
     const [form, setForm] = React.useState({
-        //id: '',
         name: '',
         title: '',
     })
@@ -44,7 +43,7 @@ function AddForm(props) {
             <br />
 
             <button onClick={() => props.history.goBack()}>Отмена</button>
-            <button onClick={() => { clickAddForm(form); props.history.goBack() }}>Добавить форму</button>
+            <button onClick={async () => { await addForm(form); props.history.goBack() }}>Добавить форму</button>
         </div>
     )
 }

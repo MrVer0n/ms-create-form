@@ -1,26 +1,26 @@
 //import React from 'react'
 import propTypes from 'prop-types'
+import AppState from '../AppState'
 import { setAddForm, setUpdateForm, setDeleteForm } from '../Fetch'
 
-export function clickAddForm(form) {
-    setAddForm(form)
+
+export async function addForm(form) {
+    const newForm = await setAddForm(form)
+    AppState.setFormState(newForm)
 }
 
-
-export function editForm(form) {
-    setUpdateForm(form)
-
+export async function editForm(form) {
+    const updateForm = await setUpdateForm(form)
+    AppState.editFormState(updateForm)
 }
-//TODO
 editForm.propTypes = {
     form: propTypes.object.isRequired
 }
 
-
 function deleteForm(id) {
-    return setDeleteForm({id})
+    AppState.delFormState(id)
+    return setDeleteForm(id)
 }
-//TODO
 deleteForm.propTypes = {
     id: propTypes.object.isRequired
 }
