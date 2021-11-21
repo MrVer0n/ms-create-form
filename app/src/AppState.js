@@ -1,28 +1,13 @@
 class AppState {
     elem = undefined
     temp = [{}]
-    
     idForm = undefined
-    field = [
-        //{ 
-        // id: 0, 
-        // idForm: 0, 
-        // isActive: true, 
-        // title: 'Название', 
-        // isRequire: false, 
-        // inputType: 'text', 
-        // priority: '1', 
-        // placeHolder: '', 
-        // possbleValues: [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }, { id: 3, title: 'test3' }]
-        //}
-]
-    form = [
-
-    ]
- 
+    field = []
+    form = []
 
     //##########-FORM-##########
-    setAllFromState(x){
+
+    setAllFromState(x) {
         this.form = x
     }
     setFormState(x) {
@@ -32,6 +17,14 @@ class AppState {
     getFormState() {
         return this.form
     }
+    getWithIdFormState(x) {
+        this.form.forEach((form) => {
+            if (form.id === x) {
+                this.elem = form
+            }
+        })
+        return this.elem
+    }
 
     delFormState(x) {
         this.form.forEach((value, key) => {
@@ -40,7 +33,6 @@ class AppState {
         })
         return this.form
     }
-
     editFormState(newElem) {
         this.form.forEach((form) => {
             if (form.id === newElem.id) {
@@ -50,15 +42,6 @@ class AppState {
                 form.userId = newElem.userId
             }
         })
-    }
-
-    getWithIdFormState(x) {
-        this.form.forEach((form) => {
-            if (form.id === x) {
-                this.elem = form
-            }
-        })
-        return this.elem
     }
 
     setIdForm(x) {
@@ -72,16 +55,33 @@ class AppState {
 
     //##########-FIELD-##########
 
-    setAllFieldState(x){
+    setAllFieldState(x) {
         this.field = x
     }
-
     setFieldState(x) {
         this.field = this.field.concat(x)
     }
 
     getFieldState() {
         return this.field
+    }
+    getWithIdFieldState(x) {
+        this.field.forEach((field) => {
+            if (field.id === x) {
+                this.elem = field
+            }
+        })
+        return this.elem
+    }
+    getWhithIdFormFiledState(x) {
+        this.temp = [{}]
+        this.field.forEach((field) => {
+            if (field.idForm === x) {
+                this.temp = this.temp.concat(field)
+            }
+        })
+        this.temp.shift()
+        return this.temp
     }
 
     delFieldState(x) {
@@ -91,7 +91,6 @@ class AppState {
         })
         return this.field
     }
-
     editFieldState(newElem) {
         this.field.forEach((field) => {
             if (field.id === newElem.id) {
@@ -103,31 +102,9 @@ class AppState {
                 field.possbleValues = newElem.possbleValues
             }
         })
+        return this.field
     }
-
-    getWithIdFieldState(x) {
-        this.field.forEach((field) => {
-            if (field.id === x) {
-                this.elem = field
-            }
-        })
-        return this.elem
-    }
-
-    setAddFieldState(x) {
-        this.field = x
-    }
-
-    getWhithIdFormFiledState(x) {
-        this.temp = [{}]
-        this.field.forEach((field) => {
-            if (field.idForm === x) {
-                this.temp = this.temp.concat(field)
-            }
-        })
-        this.temp.shift()
-        return this.temp
-    }
+   
 
 }
 export default new AppState()
