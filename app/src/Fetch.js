@@ -154,8 +154,12 @@ export async function getAllResponse() {
 //########## Add Response ############
 export async function setAddResponse(response) {
     const url = firstUrl + '/api/v1/response/add'
+    const body={}
+    body.formId = response[0].idForm
+    body.responseBody = response
+    console.log(body);
     try {
-        const data = await sendRequestB('POST', url, response)
+        const data = await sendRequestB('POST', url, body)
         return data.data
     } catch (err) {
         alert("Что то пошло не так, повторити попытку")
