@@ -6,10 +6,11 @@ import '../Css/App.css'
 import { useParams } from 'react-router-dom'
 import { MoreParams, defParams, TextArea, Rating } from './FuctionView'
 import FormState from './FormState'
+import { setAddResponse } from '../Fetch'
 
 function FormView(props) {
     const formId = Number(useParams().idForm)
-    const form = AppState.getWhithIdFormFiledState(formId)
+    const form = AppState.getFieldState()
     FormState.setFormState(form)
     //let Title = /.*(?=\s.*$)/;
     //let id = /\w+$/;
@@ -17,15 +18,16 @@ function FormView(props) {
         event.preventDefault()
         const dateNow = new Date().toLocaleString()
         const data = new FormData(event.target)
-        
         for (const key of data.keys()) {
             FormState.setResponseState({
-                id:Number(key),
+                id: Number(key),
                 data: dateNow,
                 value: data.get(key)
             })
         }
         FormState.setResponseFormState()
+        console.log(FormState.getFormState());
+        setAddResponse(FormState.getFormState())
     }
 
     return (
@@ -35,7 +37,6 @@ function FormView(props) {
             <form onSubmit = {writeForm} >
                 {form.map((field) => {
                     if (field.isActive) {
-
                         switch (field.inputType) {
 
                         case 'checkbox':

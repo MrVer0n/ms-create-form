@@ -1,12 +1,15 @@
 class FormState {
-    form = { responseBody: [] }
+    form = { responseBody:[] }
     response = []
 
     setFormState(x) {
-        for (let i = 0; i < x.length; i++) {
-            x[i].responseBody = []
-        }
         this.form = x;
+        for (let i = 0; i < x.length; i++) {
+            if(this.form[i] !== undefined){
+                this.form[i].responseBody = []
+            }
+        }
+        console.log(this.form);
     }
 
     setResponseState(x) {
@@ -17,7 +20,7 @@ class FormState {
         this.form.forEach((form) => {
             this.response.forEach((response) => {
                 if (form.id === response.id) {
-                    form.responseBody = form.responseBody.concat(response)
+                    form.responseBody = response
                 }
             })
 
