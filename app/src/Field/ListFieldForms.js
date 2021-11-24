@@ -19,7 +19,6 @@ function ViewField() {
             getDataField()
         }
     }, [])
-
     function delFild(id) {
         if (window.confirm("Вы уверены?")) {
             delelElem(id)
@@ -41,6 +40,7 @@ function ViewField() {
                 <button><Link to={'/'}>К списку форм</Link></button>
                 <button><Link to={`/form/${Number(useParams().idForm)}/addfield`}>Добавит поля в форму</Link></button>
                 <button><Link to={`/form/${Number(useParams().idForm)}/view`}>Перейти к форме</Link></button>
+                <button><Link to={`/form/${Number(useParams().idForm)}/response`}>Перейти к ответам</Link></button>
 
             </div>
             <div>
@@ -53,6 +53,8 @@ function ViewField() {
                                 <th>Обязательно для заполнения</th>
                             </tr>
                             {field.map((field) => {
+                                    //TODO
+                                    field.idForm = AppState.getIdForm()
                                 return (
                                     <tr key={`tr${field.id}`}>
                                         <th><input
