@@ -10,6 +10,7 @@ import ListFieldForms from './Field/ListFieldForms'
 import AddField from './Field/AddField'
 import EditFieldWin from './Field/EditFieldWin'
 import FormView from './Response/FormView'
+import ResponseView from './Response/ResponseView'
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path={'/editform/:idForm'} component={EditForm} />
                 <Route exact path={'/form/:idForm/addfield'} component={AddField} />
                 <Route exact path={'/form/:idForm/editfield/:idField'} component={EditFieldWin} />
+                <Route exact path={'/form/:idForm/response'} component={ResponseView} />
                 <Route exact path={'/form/:idForm/view'} component={FormView} />
                 <Route path={'/form/:idForm'} component={ListFieldForms} />
             </Switch>
