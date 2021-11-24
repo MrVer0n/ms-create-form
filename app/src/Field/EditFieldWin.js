@@ -21,6 +21,8 @@ function EditFieldWin(props) {
         placeHolder: '',
         possbleValues: []
     })
+    //TODO
+    field.idForm = AppState.getIdForm()
     React.useEffect(() => {
         lockResp(field.inputType)
         lockPlaceHold(field.inputType)
