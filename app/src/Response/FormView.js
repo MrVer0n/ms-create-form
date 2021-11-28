@@ -67,7 +67,7 @@ function FormView(props) {
                     } else { return null }
                 })}
                 <br />
-                <button type="submit">Отправить</button>
+                <button onClick={()=>props.history.goBack()} type="submit">Отправить</button>
             </form>
         </div>
     )
