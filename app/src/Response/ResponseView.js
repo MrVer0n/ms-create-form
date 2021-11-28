@@ -11,6 +11,13 @@ import { useParams } from 'react-router-dom'
 function ResponseView(props) {
     const formId = Number(useParams().idForm)
     const [response, setResponse] = React.useState(AppState.getData())
+    React.useEffect(() => {
+            async function getDataData() {
+                const data = await getAllResponse(formId)
+                AppState.setData(data); setResponse(AppState.getData())
+            }
+            getDataData()
+    }, [])
     const resp = true
     function delResponse(id) {
         if (window.confirm("Вы уверены?")) {

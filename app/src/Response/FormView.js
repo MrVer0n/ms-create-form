@@ -30,6 +30,16 @@ function FormView(props) {
         setAddResponse(FormState.getFormState())
     }
 
+    React.useEffect(() => {
+
+        async function getDataField() {
+            const data = await getFieldForm(AppState.getIdForm())
+            AppState.setAllFieldState(data);setForm(AppState.getFieldState())
+        }
+        getDataField()
+
+}, [])
+
     return (
         <div>
             <h2>Предпросмотр формы</h2>
