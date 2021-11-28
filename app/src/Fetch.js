@@ -1,3 +1,5 @@
+import AppState from "./AppState"
+
 const firstUrl = 'http://localhost:8080'
 const token = 'YourTar ee144968a86f120aa44fc9675911a3f7e658da90c15e37945e46ec82b15c66f0f3d657a0c7bd783122d44127334d6b705ce186325efc2f6f0d501bf16cf631aa'
 
@@ -91,6 +93,7 @@ export async function FindField(id) {
 
 //########## Add Field ############
 export async function setAddField(field) {
+    field.formId = AppState.getIdForm()
     const url = firstUrl + '/api/v1/fields/add'
     try {
         const data = await sendRequestB('POST', url, field)
@@ -115,6 +118,7 @@ export async function setDeleteField(id) {
 
 //########## Update Field ############
 export async function setUpdateField(field) {
+    field.formId = AppState.getIdForm()
     const url = firstUrl + '/api/v1/fields/update'
     try {
         const data = await sendRequestB('PATCH', url, field)
@@ -140,10 +144,14 @@ export async function getFieldForm(id) {
 
 //############# RESPONSE ################
 //########## Get All Response Form ############
-export async function getAllResponse() {
+export async function getAllResponse(id) {
+    let body = {}
+    body.formId = id
+    body.limit = 20
+    body.offset = 0
     const url = firstUrl + '/api/v1/response/get'
     try {
-        const data = await sendRequestB('POST', url)
+        const data = await sendRequestB('POST', url, body)
         return data.data
     } catch (err) {
         alert("Что то пошло не так, повторити попытку")
@@ -155,7 +163,7 @@ export async function getAllResponse() {
 export async function setAddResponse(response) {
     const url = firstUrl + '/api/v1/response/add'
     const body={}
-    body.formId = response[0].idForm
+    body.formId = AppState.getIdForm()
     body.responseBody = response
     console.log(body);
     try {

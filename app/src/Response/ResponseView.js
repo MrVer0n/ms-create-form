@@ -5,8 +5,11 @@ import propTypes from 'prop-types'
 import '../Css/App.css'
 import { delelResponse, MoreParams, defParams, TextArea, Rating } from './FuctionView'
 import { Link } from 'react-router-dom'
+import { getAllResponse } from '../Fetch'
+import { useParams } from 'react-router-dom'
 
 function ResponseView(props) {
+    const formId = Number(useParams().idForm)
     const [response, setResponse] = React.useState(AppState.getData())
     const resp = true
 

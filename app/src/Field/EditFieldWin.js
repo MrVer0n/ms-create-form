@@ -6,13 +6,16 @@ import FieldCreate from './FieldCreate'
 import { lockMoreParam, lockResp, lockPlaceHold, updataField } from './FinctionField'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { getFieldForm } from '../Fetch'
 
 
 function EditFieldWin(props) {
     const id = Number(useParams().idField)
-    const [field, setField] = React.useState(id !== undefined ? AppState.getWithIdFieldState(id) : {
+    const formId = Number(useParams().idForm)
+    AppState.setIdForm(formId)
+    const [field, setField] = React.useState( {
         id: id,
-        idForm: AppState.getIdForm(),
+        formId: AppState.getIdForm(),
         isActive: false,
         title: '',
         isRequire: false,
@@ -21,9 +24,24 @@ function EditFieldWin(props) {
         placeHolder: '',
         possbleValues: []
     })
-    //TODO
-    field.idForm = AppState.getIdForm()
+    field.formId = AppState.getIdForm()
     React.useEffect(() => {
+
+            async function getDataField() {
+                const data = await getFieldForm(AppState.getIdForm())
+                AppState.setAllFieldState(data); setField(AppState.getWithIdFieldState(id))
+            }
+            getDataField()
+
+    }, [])
+    React.useEffect(() => {
+        if (AppState.getFieldState().length === 0) {
+            async function getDataField() {
+                const data = await getFieldForm(AppState.getIdForm())
+                AppState.setAllFieldState(data); setField(AppState.getWithIdFieldState(id))
+            }
+            getDataField()
+        }
         lockResp(field.inputType)
         lockPlaceHold(field.inputType)
         lockMoreParam(field.inputType)

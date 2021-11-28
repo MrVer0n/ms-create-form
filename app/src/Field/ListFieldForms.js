@@ -27,11 +27,11 @@ function ViewField() {
     }
     function activFild(e, id, idForm) {
         setIsisActive(e, id)
-        setField(AppState.getWhithIdFormFiledState(idForm))
+        setField(AppState.getNewFiledState())
     }
     function racuireFild(e, id, idForm) {
         setisRequire(e, id)
-        setField(AppState.getWhithIdFormFiledState(idForm))
+        setField(AppState.getNewFiledState())
     }
     return (
         <div>
@@ -53,8 +53,6 @@ function ViewField() {
                                 <th>Обязательно для заполнения</th>
                             </tr>
                             {field.map((field) => {
-                                    //TODO
-                                    field.idForm = AppState.getIdForm()
                                 return (
                                     <tr key={`tr${field.id}`}>
                                         <th><input

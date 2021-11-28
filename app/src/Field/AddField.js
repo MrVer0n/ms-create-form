@@ -2,13 +2,16 @@ import React from 'react'
 import AppState from '../AppState'
 import propTypes from 'prop-types'
 
+import { useParams } from 'react-router-dom'
 import FieldCreate from './FieldCreate'
 import { lockResp, lockPlaceHold, lockMoreParam, addField } from './FinctionField'
 
 
 function AddField(props) {
+
+    const formId = Number(useParams().idForm)
     const [field, setField] = React.useState({
-        idForm: AppState.getIdForm(),
+        formId,
         isActive: false,
         title: '',
         isRequire: false,

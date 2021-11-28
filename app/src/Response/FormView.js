@@ -6,11 +6,12 @@ import '../Css/App.css'
 import { useParams } from 'react-router-dom'
 import { MoreParams, defParams, TextArea, Rating } from './FuctionView'
 import FormState from './FormState'
-import { setAddResponse } from '../Fetch'
+import { getFieldForm, setAddResponse } from '../Fetch'
 
 function FormView(props) {
     const formId = Number(useParams().idForm)
-    const form = AppState.getFieldState()
+    AppState.setIdForm(formId)
+    const [form, setForm] = React.useState(AppState.getFieldState())
     FormState.setFormState(form)
     //let Title = /.*(?=\s.*$)/;
     //let id = /\w+$/;
