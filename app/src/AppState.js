@@ -1,233 +1,14 @@
 class AppState {
     elem = undefined
     temp = [{}]
-    idForm = undefined
+    formId = undefined
     field = []
     form = []
-    data = [
-        {
-             id : 10,
-             responseBody : [
-                {
-                     id : 54,
-                     title :  'Название' ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 1,
-                     inputType :  'text' ,
-                     isRequire : true,
-                     placeHolder :  "" ,
-                     responseBody : {
-                         id : 54,
-                         data : ' 24.11.2021, 14:37:45' ,
-                         value :  "Защитники" 
-                    },
-                     possbleValues : []
-                },
-                {
-                     id : 55,
-                     title :  "Отзыв" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 2,
-                     inputType :  "textarea" ,
-                     isRequire : false,
-                     placeHolder :  "" ,
-                     responseBody : {
-                         id : 55,
-                         data :  "24.11.2021, 14:37:45" ,
-                         value :  "Отстой" 
-                    },
-                     possbleValues : []
-                },
-                {
-                     id : 56,
-                     title :  "Рейтинг" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 3,
-                     inputType :  "radio" ,
-                     isRequire : false,
-                     placeHolder :  "" ,
-                     responseBody : {
-                         id : 56,
-                         data :  "24.11.2021, 14:37:45" ,
-                         value :  1 
-                    },
-                     possbleValues : [
-                        {
-                             id : 16377391122,
-                             title :  1 
-                        },
-                        {
-                             id : 16377391150,
-                             title :  2 
-                        },
-                        {
-                             id : 16377391161,
-                             title :  3 
-                        },
-                        {
-                             id : 16377391172,
-                             title :  4 
-                        },
-                        {
-                             id : 16377391189,
-                             title :  5 
-                        }
-                    ]
-                },
-            ]
-        },
-        {
-             id : 11,
-             responseBody : [
-                {
-                     id : 54,
-                     title :  "Название" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 1,
-                     inputType :  "text" ,
-                     isRequire : true,
-                     placeHolder : ""  ,
-                     responseBody : {
-                         id : 54,
-                         data :  "24.11.2021, 14:45:58" ,
-                         value :  "Защитники" 
-                    },
-                     possbleValues : []
-                },
-                {
-                     id : 55,
-                     title :  "Отзыв" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 2,
-                     inputType :  "textarea" ,
-                     isRequire : false,
-                     placeHolder :  "" ,
-                     responseBody : {
-                         id : 55,
-                         data :  "24.11.2021, 14:45:58" ,
-                         value :  "Фууу" 
-                    },
-                     possbleValues : []
-                },
-                {
-                     id : 56,
-                     title :  "Рейтинг" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 3,
-                     inputType :  "radio" ,
-                     isRequire : false,
-                     placeHolder :  "" ,
-                     responseBody : {
-                         id : 56,
-                         data :  "24.11.2021, 14:45:58" ,
-                         value :  1 
-                    },
-                     possbleValues : [
-                        {
-                             id : 16377391122,
-                             title :  1 
-                        },
-                        {
-                             id : 16377391150,
-                             title :  2 
-                        },
-                        {
-                             id : 16377391161,
-                             title :  3 
-                        },
-                        {
-                             id : 16377391172,
-                             title :  4 
-                        },
-                        {
-                             id : 16377391189,
-                             title :  5 
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-             id : 12,
-             responseBody : [
-                {
-                     id : 54,
-                     title :  "Название" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 1,
-                     inputType :  "text" ,
-                     isRequire : true,
-                     placeHolder : ""  ,
-                     responseBody : {
-                         id : 54,
-                         data :  "24.11.2021, 14:46:12" ,
-                         value :  'Интерстеллар'  
-                    },
-                     possbleValues : []
-                },
-                {
-                     id : 55,
-                     title :  "Отзыв" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 2,
-                     inputType :  "textarea" ,
-                     isRequire : false,
-                     placeHolder :  "" ,
-                     responseBody : {
-                         id : 55,
-                         data :  "24.11.2021, 14:46:12" ,
-                         value :  "Ваууу" 
-                    },
-                     possbleValues : []
-                },
-                {
-                     id : 56,
-                     title :  "Рейтинг" ,
-                     idForm : 42,
-                     isActive : true,
-                     priority : 3,
-                     inputType :  "radio" ,
-                     isRequire : false,
-                     placeHolder :  "" ,
-                     responseBody : {
-                         id : 56,
-                         data :  "24.11.2021, 14:46:12" ,
-                         value :  5 
-                    },
-                     possbleValues : [
-                        {
-                             id : 16377391122,
-                             title :  1 
-                        },
-                        {
-                             id : 16377391150,
-                             title :  2 
-                        },
-                        {
-                             id : 16377391161,
-                             title :  3 
-                        },
-                        {
-                             id : 16377391172,
-                             title :  4 
-                        },
-                        {
-                             id : 16377391189,
-                             title :  5 
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    data = []
+
+    setData(x){
+        this.data = x
+    }
     getData(){
         return this.data
     }
@@ -279,11 +60,11 @@ class AppState {
     }
 
     setIdForm(x) {
-        if (x !== undefined) { this.idForm = x }
+        if (x !== undefined) { this.formId = x }
     }
 
     getIdForm() {
-        return this.idForm
+        return this.formId
     }
 
 
@@ -307,12 +88,10 @@ class AppState {
         })
         return this.elem
     }
-    getWhithIdFormFiledState(x) {
+    getNewFiledState(x) {
         this.temp = [{}]
         this.field.forEach((field) => {
-            if (field.idForm === x) {
                 this.temp = this.temp.concat(field)
-            }
         })
         this.temp.shift()
         return this.temp
