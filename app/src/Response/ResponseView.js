@@ -12,7 +12,6 @@ function ResponseView(props) {
     const formId = Number(useParams().idForm)
     const [response, setResponse] = React.useState(AppState.getData())
     const resp = true
-
     function delResponse(id) {
         if (window.confirm("Вы уверены?")) {
             delelResponse(id)
@@ -44,7 +43,7 @@ function ResponseView(props) {
 
                                     case 'rating':
                                         return (
-                                            Rating(responseBody, resp)
+                                            Rating(responseBody, resp,responseB.id)
                                         )
                                     default:
                                         return defParams(responseBody, resp)
