@@ -9,7 +9,6 @@ class FormState {
                 this.form[i].responseBody = []
             }
         }
-        console.log(this.form);
     }
 
     setResponseState(x) {
@@ -26,7 +25,6 @@ class FormState {
 
         })
         this.response = []
-        console.log(this.form);
     }
 
     getFormState() {

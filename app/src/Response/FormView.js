@@ -27,7 +27,6 @@ function FormView(props) {
             })
         }
         FormState.setResponseFormState()
-        console.log(FormState.getFormState());
         setAddResponse(FormState.getFormState())
     }
 
