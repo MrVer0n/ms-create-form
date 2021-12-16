@@ -5,7 +5,6 @@ import propTypes from 'prop-types'
 import FieldCreate from './FieldCreate'
 import { lockMoreParam, lockResp, lockPlaceHold, updataField } from './FinctionField'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { getFieldForm } from '../Fetch'
 
 
@@ -49,11 +48,17 @@ function EditFieldWin(props) {
 
     return (
         <div>
-            <h2>Изменить поле</h2>
-            {FieldCreate(field, setField)}
             <div>
-                <button ><Link to={`/form/${Number(useParams().idForm)}`}>Отмена</Link></button>
-                <button onClick={async () => { await updataField(field); props.history.goBack() }}>Изменить</button>
+                <div>
+                    <i className="float-left medium material-icons">edit</i>
+                    <h2 className='margin-t text-cursor-off'>Изменение поля</h2>
+                </div>
+                <hr />
+            </div>
+            {FieldCreate(field, setField)}
+            <div className='margin-top'>
+                <button className='left-pad20 waves-effect waves-light btn #009688 teal' onClick={() => { document.location.href = `/form/${formId}` }}>Отмена</button>
+                <button className='waves-effect waves-light btn left-pad20 #009688 teal' onClick={async () => { await updataField(field); props.history.goBack() }}>Изменить</button>
             </div>
         </div>
     )
