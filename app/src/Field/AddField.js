@@ -1,5 +1,4 @@
 import React from 'react'
-import AppState from '../AppState'
 import propTypes from 'prop-types'
 
 import { useParams } from 'react-router-dom'
@@ -25,11 +24,17 @@ function AddField(props) {
     })
     return (
         <div>
-            <h2>Добавить поле</h2>
-            {FieldCreate(field, setField)}
             <div>
-                <button onClick={() => props.history.goBack()}>Отмена</button>
-                <button onClick={async () => { await addField(field); props.history.goBack() }}>Подтвердить</button>
+                    <div>
+                        <i className="float-left medium material-icons">note_add</i>
+                        <h2 className='margin-t text-cursor-off'>Создание поля</h2> 
+                    </div>
+                    <hr />
+                </div>
+            {FieldCreate(field, setField)}
+            <div className='margin-top'>
+                <button className='left-pad20 waves-effect waves-light btn #009688 teal' onClick={() => props.history.goBack()}>Отмена</button>
+                <button className='waves-effect waves-light btn left-pad20 #009688 teal' onClick={async () => { await addField(field); props.history.goBack() }}>Подтвердить</button>
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../Css/App.css'
 import { lockMoreParam, lockPlaceHold, lockResp } from './FinctionField'
 
 
@@ -71,130 +71,155 @@ export function FieldCreate(field, setField) {
 
     return (
         <div>
-            <h4>Информация о поле</h4>
+            <h4 className='zagp'>Информация о поле</h4>
 
-            <label id="zagp">Заголовок поля:
+            <div className='zagp'>
+                <label id="zagp">Заголовок поля:
+                    <br />
+                    <input
+                        type="text"
+                        id="zagp"
+                        className="zagp"
+                        value={field.title}
+                        onChange={e => setField(inputTitle(e.target.value))} />
+                </label>
                 <br />
-                <input
-                    type="text"
-                    id="zagp"
-                    className="zagp"
-                    value={field.title}
-                    onChange={e => setField(inputTitle(e.target.value))} />
+            </div>
 
-            </label>
-            <br />
-
-            <label id="needz">
-                <input
-                    type="checkbox"
-                    id="needz"
-                    className="needz"
-                    checked={field.isRequire}
-                    onChange={e => setField(inputisRequire(e.target.checked))} />
-
-                Поле обязательное для заполнения
-            </label>
-            <br />
-
-            <label id="typeP">Тип поля:</label>
-            <br />
-            <select
-                id="typeP"
-                className="typeP"
-                value={field.inputType}
-                onChange={e => { setField(inputType(e.target.value)) }}>
-
-                <option value="text">Текст однострочный</option>
-                <option value="textarea">Текст многострочный</option>
-                <option value="rating">Рейтинг</option>
-            </select>
-            <br />
-
-            <label id="typeR">Тип ответа:
+            <div className='needz'>
+                <label id="needz">
+                    <input
+                        type="checkbox"
+                        id="needz"
+                        className="needz"
+                        checked={field.isRequire}
+                        onChange={e => setField(inputisRequire(e.target.checked))} />
+                    <span>Поле обязательное для заполнения</span>
+                </label>
                 <br />
-                {//Не работает setisisActive(lockMoreParam())
-                }
-                <select
-                    id="typeR"
-                    className="typeR"
-                    value={field.inputType}
-                    disabled={lockResp(field.inputType)}
-                    onChange={e => { setField(inputTypeR(e.target.value)) }}>
+            </div>
 
-                    <option value="text">Текст</option>
-                    <option value="number">Число</option>
-                    <option value="email">E-mail</option>
-                    <option value="tel">Телефон</option>
-                    <option value="url">Веб-адрес</option>
+            <div className='margin-top'>
+                <div className='tb'>
 
-                    <option value="date">Дата</option>
-                    <option value="time">Время</option>
-                    <option value="month">Месяц</option>
-                    <option value="week">Неделя</option>
-                    <option value="datetime-local">Дата и время</option>
+                    <div className='th-not-padding'>
+                        <label className='typeP' id="typeP">Тип поля:</label>
+                        <br />
+                        <select
+                            id="typeP"
+                            className="typeP browser-default"
+                            value={field.inputType}
+                            onChange={e => { setField(inputType(e.target.value)) }}>
 
-                    <option value="radio">Переключатели</option>
-                    <option value="checkbox">Флаг</option>
-                    <option value="range">Диапазон</option>
-                    <option value="color">Цвет</option>
-                    {/** На дальнейшее будущее
+                            <option value="text">Текст однострочный</option>
+                            <option value="textarea">Текст многострочный</option>
+                            <option value="rating">Рейтинг</option>
+                        </select>
+                        <br />
+                    </div>
+
+                    <div className='th-not-padding'>
+                        <label className='typeR' id="typeR">Тип ответа:
+                            <br />
+                            {//Не работает setisisActive(lockMoreParam())
+                            }
+                            <select
+                                id="typeR"
+                                className="typeR browser-default"
+                                value={field.inputType}
+                                disabled={lockResp(field.inputType)}
+                                onChange={e => { setField(inputTypeR(e.target.value)) }}>
+
+                                <option value="text">Текст</option>
+                                <option value="number">Число</option>
+                                <option value="email">E-mail</option>
+                                <option value="tel">Телефон</option>
+                                <option value="url">Веб-адрес</option>
+
+                                <option value="date">Дата</option>
+                                <option value="time">Время</option>
+                                <option value="month">Месяц</option>
+                                <option value="week">Неделя</option>
+                                <option value="datetime-local">Дата и время</option>
+
+                                <option value="radio">Переключатели</option>
+                                <option value="checkbox">Флаг</option>
+                                <option value="range">Диапазон</option>
+                                <option value="color">Цвет</option>
+                                {/** На дальнейшее будущее
                     <option value="image">Изображение</option>
                     <option value="file">Файл</option>
                      */}
 
-                </select>
-            </label>
-            <br />
-            <div className='MoreParams'>
-                Колличество и заголовок:
-                <br />
-                {field.possbleValues.map(({ id, title }) => {
-                    return (
-                        <div key={id}>
-                            <input
-                                type='text'
-                                id={`param${id}`}
-                                className={`paramClass${id}`}
-                                value={title}
-                                onChange={e => setField(inputHandler(e.target.value, id))}
-                            />
-                            <button onClick={() => { setField(deleteHandler(id)) }}>-</button>
-                            <br />
+                            </select>
+                        </label>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div className='margin-top'>
+                <div className='tb'>
+                            <div className='th-not-padding'>
+                                <label id="zagp">Плейсхолдер:
+                                    <br />
+                                    <input
+                                        type="text"
+                                        id="placehold"
+                                        className="placehold"
+                                        value={field.placeHolder}
+                                        disabled={lockPlaceHold(field.inputType)}
+                                        onChange={e => setField(inputPlacehold(e.target.value))} />
+                                </label>
+                                <br />
+                            </div>
+
+                            <div className='th-not-padding'>
+                                <label id="priority">Приоритет:
+                                    <br />
+                                    <input
+                                        type="number"
+                                        id="priority"
+                                        className="priority"
+                                        value={field.priority}
+                                        onChange={e => setField(inputPriority(e.target.value))} />
+                                </label>
+                                <br />
+                            </div>
                         </div>
-                    )
-                })}
-                <button
-                    className="addParam"
-                    disabled={lockMoreParam(field.inputType)}
-                    onClick={() => { setField(addHandler()) }}>
-                    +
-                </button>
-                <br />
+                        <div>
+                            <div className='th-not-padding'>
+                                <div className='MoreParams'>
+                                    <label>Колличество и заголовок(для флага/переключателя)
+                                        <button
+                                            className="addParam btn-floating btn-small waves-effect waves-light tael"
+                                            disabled={lockMoreParam(field.inputType)}
+                                            onClick={() => { setField(addHandler()) }}>
+                                            <i className="material-icons">add</i>
+                                        </button>
+                                    </label>
+
+                                    <br />
+                                    {field.possbleValues.map(({ id, title }) => {
+                                        return (
+                                            <div key={id}>
+                                                <input
+                                                    type='text'
+                                                    id={`param${id}`}
+                                                    className={`paramClass${id} dls-param`}
+                                                    value={title}
+                                                    onChange={e => setField(inputHandler(e.target.value, id))}
+                                                />
+                                                <button className='flex float-button btn-floating btn-small waves-effect waves-light tael' onClick={() => { setField(deleteHandler(id)) }}><i className="material-icons">close</i></button>
+                                                <br />
+                                            </div>
+                                        )
+                                    })}
+                                    <br />
+                                </div>
+                    </div>
+                </div>
             </div>
 
-            <label id="zagp">Плейсхолдер:
-                <br />
-                <input
-                    type="text"
-                    id="placehold"
-                    className="placehold"
-                    value={field.placeHolder}
-                    disabled={lockPlaceHold(field.inputType)}
-                    onChange={e => setField(inputPlacehold(e.target.value))} />
-            </label>
-            <br />
-
-            <label id="priority">Приоритет:
-                <br />
-                <input
-                    type="number"
-                    id="priority"
-                    className="priority"
-                    value={field.priority}
-                    onChange={e => setField(inputPriority(e.target.value))} />
-            </label>
-            <br />
         </div>
     )
 }
