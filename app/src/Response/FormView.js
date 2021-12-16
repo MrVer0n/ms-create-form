@@ -15,7 +15,7 @@ function FormView(props) {
     FormState.setFormState(form)
     //let Title = /.*(?=\s.*$)/;
     //let id = /\w+$/;
-    const writeForm = (event) => {
+    async function writeForm(event) {
         event.preventDefault()
         const dateNow = new Date().toLocaleString()
         const data = new FormData(event.target)
@@ -27,7 +27,8 @@ function FormView(props) {
             })
         }
         FormState.setResponseFormState()
-        setAddResponse(FormState.getFormState())
+        await setAddResponse(FormState.getFormState())
+        //props.history.goBack()
     }
 
     React.useEffect(() => {
@@ -42,8 +43,23 @@ function FormView(props) {
 
     return (
         <div>
-            <h2>Предпросмотр формы</h2>
-            <button onClick={() => props.history.goBack()}>Вернуться к редактирования</button>
+            <div>
+                <i className="float-left medium material-icons">assignment</i>
+                <h2 className='margin-t text-cursor-off'>Предпросмотр</h2>
+                <hr />
+                <div className='linkblock card-panel add-field nav-bord'>
+                    <nav className='nav-bord'>
+                        <div className="nav-wrapper">
+                            <div className="col s12 #009688 teal nav-bord text-pad">
+                                <a href={`/form/${Number(useParams().idForm)}`} className="breadcrumb teal-text text-lighten-4">Поля</a>
+                                <a href={`/form/${Number(useParams().idForm)}/view`} className="breadcrumb teal-text white-text">Предпросмотр</a>
+                                <a href={`/form/${Number(useParams().idForm)}/response`} className="breadcrumb teal-text text-lighten-4">Ответы</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            {/*<button onClick={() => props.history.goBack()}>Вернуться к редактирования</button>*/}
             <form onSubmit = {writeForm} >
                 {form.map((field) => {
                     if (field.isActive) {
@@ -67,7 +83,7 @@ function FormView(props) {
                     } else { return null }
                 })}
                 <br />
-                <button onClick={()=>props.history.goBack()} type="submit">Отправить</button>
+                <button className="sub btn waves-effect waves-light" name="action" onClick={()=>{}} type="submit">Отправить</button>
             </form>
         </div>
     )
