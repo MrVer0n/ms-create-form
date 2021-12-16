@@ -12,7 +12,7 @@ export async function getAllForm() {
         const data = await sendRequestB('POST', url)
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 
@@ -25,7 +25,7 @@ export async function setFindField(id) {
         const data = await sendRequestB('POST', url, { id })
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -37,7 +37,7 @@ export async function setAddForm(form) {
         const data = await sendRequestB('POST', url, form)
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -49,7 +49,7 @@ export async function setDeleteForm(id) {
         const data = await sendRequestB('DELETE', url, { id })
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -61,7 +61,7 @@ export async function setUpdateForm(form) {
         const data = await sendRequestB('PATCH', url, form)
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -74,7 +74,7 @@ export async function getAllField() {
         const data = await sendRequestB('POST', url)
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -86,14 +86,13 @@ export async function FindField(id) {
         const data = await sendRequestB('POST', url, { id })
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
 
 //########## Add Field ############
 export async function setAddField(field) {
-    field.formId = AppState.getIdForm()
     const url = firstUrl + '/api/v1/fields/add'
     try {
         const data = await sendRequestB('POST', url, field)
@@ -111,7 +110,7 @@ export async function setDeleteField(id) {
         const data = await sendRequestB('DELETE', url, { id })
         return data.message
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -124,7 +123,7 @@ export async function setUpdateField(field) {
         const data = await sendRequestB('PATCH', url, field)
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -136,7 +135,7 @@ export async function getFieldForm(id) {
         const data = await sendRequestB('POST', url, { id })
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -154,7 +153,7 @@ export async function getAllResponse(id) {
         const data = await sendRequestB('POST', url, body)
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -170,7 +169,7 @@ export async function setAddResponse(response) {
         const data = await sendRequestB('POST', url, body)
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
@@ -182,7 +181,7 @@ export async function setDeleteResponse(id) {
         const data = await sendRequestB('POST', url, { id })
         return data.data
     } catch (err) {
-        alert("Что то пошло не так, повторити попытку")
+        //alert("Что то пошло не так, повторити попытку")
         console.log(err)
     }
 }
