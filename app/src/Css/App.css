@@ -76,3 +76,143 @@ display: inline-flex;
     transform: rotate(360deg);
   }
 }
+
+.right-button{
+  text-align: right;
+}
+.add-form{
+  max-width: 80%;
+  padding: 0;
+  margin: auto;
+}
+.float-left{
+  float: left;
+}
+.margin-t{
+  margin-top: 16px;
+}
+.linkblock {
+  cursor:pointer
+}
+.text-cursor-off{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently */
+}
+
+.left-pad{
+  margin-left: 4px;
+}
+.box-head{
+  max-width: 28rem;
+  text-align: left;
+}
+.float-button{
+  float: right;
+}
+
+.add-field{
+  max-width: 100%;
+  padding: 0;
+  margin: auto;
+}
+.nav-bord{
+  border-radius: 12px;
+}
+.text-pad{
+  padding-left: 12px;
+  }
+.zagp{
+  padding-left: 10%;
+  padding-right: 9.4%;
+}
+.needz{
+  margin-top: 20px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.margin-top{
+  margin-top: 20px;
+  margin-left: 9%;
+  margin-right: 9%;
+}
+
+.margin-table{
+  margin-left: 9%;
+  margin-right: 9%;
+}
+
+
+.th-not-padding{
+  width: 100%;
+  border: 2px solid white;
+  padding: 0px;
+  padding-left: 1%;
+}
+.tb{
+  margin: auto;
+  display: flex;
+  /* border-collapse: collapse;  Убираем двойные линии между ячейками 
+  border: 2px solid white; Прячем рамку вокруг таблицы */
+}
+div{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently */
+}
+.dls-param{
+  max-width: 95%;
+}
+.flex{
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+}
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.left-pad20{
+  margin-left: 20px;
+}
+
+.box{
+  border-radius: 10px;
+  border: 2px solid rgb(0, 150, 136); /* Прячем рамку вокруг таблицы */
+}
+
+.content{
+  margin: 10px;
+}
+.marg-top12{
+  margin-top: 12px;
+}
+
+.margin-top16{
+  margin-top: 20px;
+  margin-left: 16%;
+  margin-right: 16%;
+}
+
+.sub{
+  font-size: 24px;
+  height: 60px;
+  width: 68%;
+  margin: 0 16% 24px 16%;
+}
+.black-text{
+  font-size: 14px;
+  color: #000000;
+}
+
+.box-head5{
+  max-width: 33rem;
+  text-align: left;
+}
