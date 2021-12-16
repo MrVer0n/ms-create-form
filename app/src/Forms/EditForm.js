@@ -20,31 +20,42 @@ function EditForm(props) {
 
     return (
         <div>
-            <h2>Изменить форму</h2>
-            <label id="newNameForm">Название формы:
-                <br />
-                <input
-                    className="newNameForm"
-                    id="newNameForm"
-                    type="text"
-                    value={form.name}
-                    onChange={(e) => { setForm(inputName(e.target.value)) }} />
-            </label>
-            <br />
-
-            <label id="newNameForm">Описание формы:
-                <br />
-                <input
-                    className="newTitleForm"
-                    id="newTitleForm"
-                    type="text"
-                    value={form.title}
-                    onChange={(e) => { setForm(inputTitle(e.target.value)) }} />
-            </label>
-            <br />
-
-            <button onClick={() => props.history.goBack()}>Отмена</button>
-            <button onClick={async () => { await editForm(form); props.history.goBack() }}>Изменить</button>
+            <div>
+                <i className="float-left medium material-icons">edit</i>
+                <h2 className='margin-t text-cursor-off'>Редактирование формы</h2>
+                <hr />
+            </div>
+            <div className="card-panel hoverable add-form col s12 m2 z-depth-4">
+                <div className="col s12 m6">
+                    <div className="card blue-grey darken-1">
+                        <div className="card-content white-text">
+                            <label id="newNameForm">Название формы:
+                                <input
+                                    className="newNameForm white-text"
+                                    id="newNameForm"
+                                    type="text"
+                                    value={form.name}
+                                    onChange={(e) => { setForm(inputName(e.target.value)) }} />
+                            </label>
+                        </div>
+                        <div className="card-action">
+                            <label id="newNameForm">Описание формы:
+                                <br />
+                                <input
+                                    className="newTitleForm white-text"
+                                    id="newTitleForm"
+                                    type="text"
+                                    value={form.title}
+                                    onChange={(e) => { setForm(inputTitle(e.target.value)) }} />
+                            </label>
+                        </div>
+                        <div className="card-action right-button">
+                            <button className='waves-effect waves-light btn #009688 teal' onClick={() => props.history.goBack()}>Отмена</button>
+                            <button className='waves-effect waves-light btn left-pad #009688 teal' onClick={async () => { await editForm(form); props.history.goBack() }}>Изменить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
