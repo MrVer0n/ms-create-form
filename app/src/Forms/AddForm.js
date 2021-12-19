@@ -28,7 +28,7 @@ function AddForm(props) {
                 <div className="col s12 m6">
                     <div className="card blue-grey darken-1">
                         <div className="card-content white-text">
-                            <label id="nameForm">Название формы:
+                            <label className='input-form form-text' id="nameForm">Название формы:
                                 <input
                                     className="nameForm white-text"
                                     id="nameForm"
@@ -39,7 +39,7 @@ function AddForm(props) {
                         </div>
 
                         <div className="card-action">
-                            <label id="nameForm">Описание формы:
+                            <label className='input-form form-text' id="nameForm">Описание формы:
                                 <input
                                     className="titleForm white-text"
                                     id="titleForm"
