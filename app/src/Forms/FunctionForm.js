@@ -17,9 +17,9 @@ editForm.propTypes = {
     form: propTypes.object.isRequired
 }
 
-function deleteForm(id) {
+async function deleteForm(id) {
     AppState.delFormState(id)
-    return setDeleteForm(id)
+    return await setDeleteForm(id)
 }
 deleteForm.propTypes = {
     id: propTypes.object.isRequired

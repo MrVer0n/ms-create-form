@@ -9,6 +9,7 @@ import FormState from './FormState'
 import { getFieldForm, setAddResponse } from '../Fetch'
 
 function FormView(props) {
+    const [log, setLog] = React.useState(AppState.getLog())
     const formId = Number(useParams().idForm)
     AppState.setIdForm(formId)
     const [form, setForm] = React.useState(AppState.getFieldState())
@@ -28,6 +29,7 @@ function FormView(props) {
         }
         FormState.setResponseFormState()
         await setAddResponse(FormState.getFormState())
+        document.location.href = `/form/${formId}/response`
         //props.history.goBack()
     }
 
@@ -35,11 +37,13 @@ function FormView(props) {
 
         async function getDataField() {
             const data = await getFieldForm(AppState.getIdForm())
-            AppState.setAllFieldState(data);setForm(AppState.getFieldState())
+            AppState.setAllFieldState(data); setForm(AppState.getFieldState())
+            AppState.setLog()
+            setLog(true)
         }
         getDataField()
 
-}, [])
+    }, [])
 
     return (
         <div>
@@ -60,30 +64,47 @@ function FormView(props) {
                 </div>
             </div>
             {/*<button onClick={() => props.history.goBack()}>Вернуться к редактирования</button>*/}
-            <form onSubmit = {writeForm} >
+            <form onSubmit={writeForm} >
                 {form.map((field) => {
                     if (field.isActive) {
                         switch (field.inputType) {
 
-                        case 'checkbox':
-                        case 'radio':
-                            return MoreParams(field)
-                        
-                        case 'textarea':
-                            return TextArea(field)
+                            case 'checkbox':
+                            case 'radio':
+                                return MoreParams(field)
 
-                        case 'rating':
-                            return (
-                                Rating(field)
-                            )
-                        default:
-                            return defParams(field)
+                            case 'textarea':
+                                return TextArea(field)
+
+                            case 'rating':
+                                return (
+                                    Rating(field)
+                                )
+                            default:
+                                return defParams(field)
 
                         }
                     } else { return null }
                 })}
                 <br />
-                <button className="sub btn waves-effect waves-light" name="action" onClick={()=>{}} type="submit">Отправить</button>
+                {log === false ? <div className='center'>
+                <div className="preloader-wrapper big active">
+                    <div className="spinner-layer spinner-green-only">
+                        <div className="circle-clipper left">
+                            <div className="circle"></div>
+                        </div><div className="gap-patch">
+                            <div className="circle"></div>
+                        </div><div className="circle-clipper right">
+                            <div className="circle"></div>
+                        </div>
+                    </div>
+                </div></div> : form.some((field) => {
+                    if (field.isActive) {
+                        return true
+                    }
+                    return false
+                }) === true ? <button className="sub btn waves-effect waves-light" name="action" type="submit">Отправить</button>
+                    : <h4 className='center'>Активных полей не найдено...</h4>}
             </form>
         </div>
     )
