@@ -19,9 +19,9 @@ function ViewForm() {
        getDataForm()
     },[])
 
-    function delForm(id) {
+  async  function delForm(id) {
         if(window.confirm("Вы уверены?")) {
-            deleteForm(id)
+          await  deleteForm(id)
             setForm(AppState.getFormState())
         }
     }
@@ -38,7 +38,7 @@ function ViewForm() {
                     <div className="col s12 m6 ">
                         <div className="card #009688 teal">
                             <div className="card-content white-text">
-                                <span className="card-title text-cursor-off">Добавит новую форму</span>
+                                <span className="card-title text-cursor-off">Добавить новую форму</span>
                             </div>
                         </div> 
                 </div>

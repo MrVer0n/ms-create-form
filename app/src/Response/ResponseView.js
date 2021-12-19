@@ -8,20 +8,24 @@ import { getAllResponse } from '../Fetch'
 import { useParams } from 'react-router-dom'
 
 function ResponseView(props) {
+    const [log, setLog] = React.useState(AppState.getLog())
     const formId = Number(useParams().idForm)
     const [response, setResponse] = React.useState(AppState.getData())
     React.useEffect(() => {
-            async function getDataData() {
-                const data = await getAllResponse(formId)
-                AppState.setData(data); setResponse(AppState.getData())
-            }
-            getDataData()
+        async function getDataData() {
+            const data = await getAllResponse(formId)
+            AppState.setData(data); setResponse(AppState.getData())
+            AppState.setLog()
+            setLog(true)
+        }
+        getDataData()
     }, [])
     const resp = true
-    function delResponse(id) {
+    async function delResponse(id) {
         if (window.confirm("Вы уверены?")) {
-            delelResponse(id)
+            await delelResponse(id)
             setResponse(AppState.getData())
+            document.location.href = `/form/${formId}/response`
         }
     }
     return (
@@ -43,43 +47,53 @@ function ResponseView(props) {
                 </div>
             </div>
             {/*<button onClick={() => props.history.goBack()}>Вернуться к редактирования</button>*/}
-            <form>
-                {response.map((responseB) => {
-                    return (
-                        <div key={responseB.id}>
-                            <br/>
-                            <div className='box-head5'>
-                                <button className='btn-floating btn-medium waves-effect waves-light teal float-button' onClick={() => { delResponse(responseB.id);document.location.href=`/form/${AppState.getIdForm()}/response` }}><i className="small material-icons white-text">delete</i></button>
-                                <h4>Ответ от {responseB.responseBody[0].responseBody[0].data !==undefined?responseB.responseBody[0].responseBody[0].data:'Unknown'}</h4>
-                            </div>
-                            <div>
-                    <hr />
-                </div>
-                            {responseB.responseBody.map((responseBody) => {
-                                switch (responseBody.inputType) {
-                                    case 'checkbox':
-                                    case 'radio':
-                                        return MoreParams(responseBody, resp,responseB.id)
+            {response.map((responseB) => {
+                return (
+                    <div key={responseB.id}>
+                        <br />
+                        <div className='box-head5'>
+                            <button className='btn-floating btn-medium waves-effect waves-light teal float-button' onClick={() => { delResponse(responseB.id) }}><i className="small material-icons white-text">delete</i></button>
+                            <h4>Ответ от {responseB.responseBody[0].responseBody[0].data !== undefined ? responseB.responseBody[0].responseBody[0].data : 'Unknown'}</h4>
+                        </div>
+                        <div>
+                            <hr />
+                        </div>
+                        <div className='resp-text'>
                         {responseB.responseBody.map((responseBody) => {
+                            switch (responseBody.inputType) {
+                                case 'checkbox':
+                                case 'radio':
+                                    return MoreParams(responseBody, resp, responseB.id)
 
-                                    case 'textarea':
-                                        return TextArea(responseBody, resp)
+                                case 'textarea':
+                                    return TextArea(responseBody, resp)
 
-                                    case 'rating':
-                                        return (
-                                            Rating(responseBody, resp,responseB.id)
-                                        )
-                                    default:
-                                        return defParams(responseBody, resp)
+                                case 'rating':
+                                    return (
+                                        Rating(responseBody, resp, responseB.id)
+                                    )
+                                default:
+                                    return defParams(responseBody, resp)
 
-                                }
-                            })}
+                            }
+                        })}
                         </div>
+                    </div>
+                )
+            })}
+            <br />
+            {log === false ? <div className='center'>
+                <div className="preloader-wrapper big active">
+                    <div className="spinner-layer spinner-green-only">
+                        <div className="circle-clipper left">
+                            <div className="circle"></div>
+                        </div><div className="gap-patch">
+                            <div className="circle"></div>
+                        </div><div className="circle-clipper right">
+                            <div className="circle"></div>
                         </div>
-                    )
-                })}
-                <br />
-            </form>
+                    </div>
+                </div></div> : response.length === 0 ? <h4 className='center'> Ответов не найдено.</h4>: undefined}
         </div>
     )
 }

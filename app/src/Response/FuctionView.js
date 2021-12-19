@@ -2,9 +2,9 @@ import propTypes from 'prop-types'
 import AppState from '../AppState'
 import { setDeleteResponse } from '../Fetch'
 
-export function delelResponse(id) {
+export async function delelResponse(id) {
     AppState.delDataState(id)
-    return setDeleteResponse(id)
+    return await setDeleteResponse(id)
 }
 delelResponse.propTypes = {
     id: propTypes.number
