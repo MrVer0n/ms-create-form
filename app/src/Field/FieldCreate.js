@@ -70,7 +70,7 @@ export function FieldCreate(field, setField) {
 
 
     return (
-        <div>
+        <div className='field-text input-field border'>
             <h4 className='zagp'>Информация о поле</h4>
 
             <div className='zagp'>
@@ -142,7 +142,7 @@ export function FieldCreate(field, setField) {
                                 <option value="week">Неделя</option>
                                 <option value="datetime-local">Дата и время</option>
 
-                                <option value="radio">Переключатели</option>
+                                <option value="radio">Переключатель</option>
                                 <option value="checkbox">Флаг</option>
                                 <option value="range">Диапазон</option>
                                 <option value="color">Цвет</option>
@@ -160,7 +160,7 @@ export function FieldCreate(field, setField) {
             <div className='margin-top'>
                 <div className='tb'>
                             <div className='th-not-padding'>
-                                <label id="zagp">Плейсхолдер:
+                                <label id="zagp">Подсказка для поля (плейсхолдер):
                                     <br />
                                     <input
                                         type="text"
@@ -189,7 +189,7 @@ export function FieldCreate(field, setField) {
                         <div>
                             <div className='th-not-padding'>
                                 <div className='MoreParams'>
-                                    <label>Колличество и заголовок(для флага/переключателя)
+                                    <label>Колличество и заголовок (для флага/переключателя)
                                         <button
                                             className="addParam btn-floating btn-small waves-effect waves-light tael"
                                             disabled={lockMoreParam(field.inputType)}

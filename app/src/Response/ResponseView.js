@@ -60,6 +60,7 @@ function ResponseView(props) {
                                     case 'checkbox':
                                     case 'radio':
                                         return MoreParams(responseBody, resp,responseB.id)
+                        {responseB.responseBody.map((responseBody) => {
 
                                     case 'textarea':
                                         return TextArea(responseBody, resp)
@@ -73,6 +74,7 @@ function ResponseView(props) {
 
                                 }
                             })}
+                        </div>
                         </div>
                     )
                 })}

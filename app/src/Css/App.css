@@ -112,6 +112,8 @@ display: inline-flex;
 }
 .float-button{
   float: right;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .add-field{
@@ -121,6 +123,10 @@ display: inline-flex;
 }
 .nav-bord{
   border-radius: 12px;
+}
+.navbar-marg{
+  margin-left: 4px;
+  margin-right: 4px;
 }
 .text-pad{
   padding-left: 12px;
@@ -170,9 +176,9 @@ div{
   max-width: 95%;
 }
 .flex{
-  margin-top: 2%;
   display: flex;
-  align-items: center;
+  margin-top: 1%;
+  right: 0;
 }
 .center{
   display: flex;
@@ -215,4 +221,46 @@ div{
 .box-head5{
   max-width: 33rem;
   text-align: left;
+}
+.form-text{
+  font-size: 14px;
+  color: #f1f1f1;
+}
+.input-form input[type=text] {
+  border-bottom: 1px solid rgb(187, 187, 187);
+ 
+}
+.input-form input[type=text]:focus {
+  border-bottom: 1px solid rgb(202, 202, 202)!important;
+  box-shadow: 0 1px 0 0 rgb(187, 187, 187)!important;
+}
+.field-text label{
+  font-size: 14px;
+  color: #5f5f5f;
+}
+.input-field input[type=text] {
+  border-bottom: 1px solid #5f5f5f;
+ 
+}
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #4e4e4e!important;
+  box-shadow: 0 1px 0 0 #5f5f5f!important;
+}
+.input-field input[type=number] {
+  border-bottom: 1px solid #5f5f5f;
+ 
+}
+.input-field input[type=number]:focus {
+  border-bottom: 1px solid #4e4e4e!important;
+  box-shadow: 0 1px 0 0 #5f5f5f!important;
+}
+.border select{
+ border: 1px solid #5f5f5f;
+}
+.addParam{
+  margin-left: 8px;
+}
+
+.resp-text input:disabled{
+  color: #748181!important;
 }

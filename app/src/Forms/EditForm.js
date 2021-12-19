@@ -29,7 +29,7 @@ function EditForm(props) {
                 <div className="col s12 m6">
                     <div className="card blue-grey darken-1">
                         <div className="card-content white-text">
-                            <label id="newNameForm">Название формы:
+                            <label className='input-form form-text' id="newNameForm">Название формы:
                                 <input
                                     className="newNameForm white-text"
                                     id="newNameForm"
@@ -39,7 +39,7 @@ function EditForm(props) {
                             </label>
                         </div>
                         <div className="card-action">
-                            <label id="newNameForm">Описание формы:
+                            <label className='input-form form-text' id="newNameForm">Описание формы:
                                 <br />
                                 <input
                                     className="newTitleForm white-text"
