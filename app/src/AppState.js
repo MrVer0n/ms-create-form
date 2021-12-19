@@ -5,6 +5,22 @@ class AppState {
     field = []
     form = []
     data = []
+    translationEng = ["text","textarea","rating","number","email","tel","url","date","time","month","week","datetime-local","radio","checkbox","range","color"]
+    translationRus = ["текст","текст многострочный","рейтинг","число","e-mail","телефон","веб-адрес","дата","время","месяц","неделя","дата и время","переключатель","флаг","диапазон","цвет"]
+    log = false
+    setRuText(x){
+        for (let index = 0; index < this.translationEng.length; index++) {
+             if(x === this.translationEng[index]){
+                return this.translationRus[index]
+             }
+        }
+    }
+    getLog(){
+        return this.log
+    }
+    setLog(){
+        this.log = true
+    }
 
     setData(x){
         this.data = x
