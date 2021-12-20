@@ -2,7 +2,7 @@ import React from 'react'
 import AppState from '../AppState'
 
 import { useParams } from 'react-router-dom'
-import { setIsisActive, setisRequire, delelElem } from './FinctionField'
+import { setIsisActive, setisRequire, delelElem, SortField } from './FinctionField'
 import { getFieldForm } from '../Fetch'
 
 function ViewField() {
@@ -36,6 +36,7 @@ function ViewField() {
         setisRequire(e, id)
         setField(AppState.getNewFiledState())
     }
+    SortField()
     return (
         <div>
             <div>
