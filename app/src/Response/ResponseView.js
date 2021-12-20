@@ -59,24 +59,27 @@ function ResponseView(props) {
                             <hr />
                         </div>
                         <div className='resp-text'>
-                        {responseB.responseBody.map((responseBody) => {
-                            switch (responseBody.inputType) {
-                                case 'checkbox':
-                                case 'radio':
-                                    return MoreParams(responseBody, resp, responseB.id)
+                            {responseB.responseBody.map((responseBody) => {
+                                if (responseBody.isActive) {
+                                    switch (responseBody.inputType) {
+                                        case 'checkbox':
+                                        case 'radio':
+                                            return MoreParams(responseBody, resp, responseB.id)
 
-                                case 'textarea':
-                                    return TextArea(responseBody, resp)
+                                        case 'textarea':
+                                            return TextArea(responseBody, resp)
 
-                                case 'rating':
-                                    return (
-                                        Rating(responseBody, resp, responseB.id)
-                                    )
-                                default:
-                                    return defParams(responseBody, resp)
+                                        case 'rating':
+                                            return (
+                                                Rating(responseBody, resp, responseB.id)
+                                            )
+                                        default:
+                                            return defParams(responseBody, resp)
 
-                            }
-                        })}
+                                    }
+                                }
+                                return undefined
+                            })}
                         </div>
                     </div>
                 )

@@ -81,7 +81,10 @@ export function TextArea(field, response = false) {
 }
 
 export function Rating(field, response = false, id) {
-    const value = Number(field.responseBody.value)
+    let value = undefined
+    if(response){
+        value = Number(field.responseBody[0].value)
+       }
     return <div key={field.id} className='margin-top16 box #004d40 #e0f2f1 teal lighten-5 col s12 m2 z-depth-2'>
           <div className='content'>
         <label className='black-text' id={field.id}>{field.title}</label>
